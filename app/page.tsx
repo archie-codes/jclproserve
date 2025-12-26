@@ -17,7 +17,7 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="font-bold text-xl text-blue-900">
           <Image
-            src="/main-logo.png"
+            src="/jcl-logo.png"
             alt="Manpower workers"
             width={30}
             height={30}
