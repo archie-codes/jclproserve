@@ -17,10 +17,32 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import SplitText from "@/components/SplitText";
+// import Carousel from "@/components/ui/carousel";
 
 const handleAnimationComplete = () => {
   console.log("All letters have animated!");
 };
+
+const testimonials = [
+  {
+    src: "/ceo-louie.jpg",
+    message:
+      '"The most professional staffing partner we\'ve ever worked with. Excellence in every deployment."',
+    name: "— CEO/ Managing Partner, JC&L Proserve Inc.",
+  },
+  {
+    src: "/vp-crisencia.jpg",
+    message:
+      '"Their commitment and expertise made our staffing seamless and efficient."',
+    name: "— Vice President, JC&L Proserve Inc.",
+  },
+  {
+    src: "/ceo-silluoet.jpg",
+    message:
+      '"A reliable partner who consistently exceeds expectations in every project."',
+    name: "— HR Director, JC&L Proserve Inc.",
+  },
+];
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -116,6 +138,16 @@ function Navbar() {
 }
 
 export default function HomePage() {
+  const [current, setCurrent] = useState(0);
+
+  const nextSlide = () => {
+    setCurrent((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrent((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+  };
+
   return (
     <main className="min-h-screen bg-background selection:bg-primary/20">
       <Navbar />
@@ -322,7 +354,7 @@ export default function HomePage() {
       <section id="about" className="py-32 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div className="relative">
+            {/* <div className="relative">
               <div className="absolute -top-10 -left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl opacity-60" />
               <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
                 <Image
@@ -346,6 +378,52 @@ export default function HomePage() {
                 <p className="mt-4 font-bold text-foreground">
                   — CEO/ Managing Partner, JC&L Proserve Inc.
                 </p>
+              </div>
+            </div> */}
+            <div className="relative w-full max-w-md mx-auto">
+              {/* Background blur circle */}
+              <div className="absolute -top-12 -left-12 w-96 h-96 bg-primary/10 rounded-full blur-3xl opacity-60" />
+
+              {/* Image container - slightly bigger */}
+              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white scale-105">
+                <Image
+                  src={testimonials[current].src}
+                  alt="Our Team"
+                  width={600}
+                  height={800}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+
+              {/* Testimonial box - slightly smaller */}
+              <div className="absolute -bottom-8 -right-8 bg-white p-6 rounded-2xl shadow-2xl border max-w-[60%]">
+                <div className="flex gap-1 mb-3">
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <div key={s} className="w-4 h-4 bg-yellow-400 rounded-sm" />
+                  ))}
+                </div>
+                <p className="text-xs font-medium italic text-muted-foreground">
+                  {testimonials[current].message}
+                </p>
+                <p className="mt-3 font-bold text-foreground">
+                  {testimonials[current].name}
+                </p>
+
+                {/* Carousel controls */}
+                <div className="flex justify-between mt-4">
+                  <button
+                    onClick={prevSlide}
+                    className="px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300 text-xs"
+                  >
+                    Prev
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300 text-xs"
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -413,12 +491,12 @@ export default function HomePage() {
       </section>
 
       {/* CALL TO ACTION - Bold, immersive section */}
-      {/* <section id="jobs" className="px-6 py-20">
-        <div className="max-w-7xl mx-auto rounded-[3rem] bg-blue-950 relative overflow-hidden px-10 py-24 text-center">
+      <section id="jobs" className="px-6 py-20">
+        <div className="max-w-7xl mx-auto rounded-[3rem] bg-blue-600 relative overflow-hidden px-10 py-24 text-center">
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
           <div className="relative z-10 space-y-8 max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-6xl font-black text-white leading-tight">
-              Ready to <span className="text-primary italic">Transform</span> Your Workforce?
+              Ready to <span className="text-green-600 italic">Transform</span> Your Workforce?
             </h2>
             <p className="text-xl text-blue-100/70 max-w-xl mx-auto font-medium">
               Join hundreds of industry leaders who trust us with their most valuable asset—their people.
@@ -426,7 +504,7 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
               <Button
                 size="lg"
-                className="w-full sm:w-auto rounded-full px-12 h-16 text-lg font-extrabold shadow-2xl shadow-primary/40 bg-primary hover:bg-primary/90"
+                className="w-full sm:w-auto rounded-full px-12 h-16 text-lg font-extrabold shadow-2xl shadow-primary/40 bg-green-600 hover:bg-primary/90"
               >
                 Partner With Us
               </Button>
@@ -440,7 +518,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* FOOTER - Clean, authoritative layout */}
       <footer className="bg-slate-50 border-t py-20">
@@ -456,10 +534,8 @@ export default function HomePage() {
                   className="bg-transparent"
                 />
               </div>
-              <span className="font-extrabold text-xl tracking-tight">
-                <span className="text-green-600">J</span>
-                <span className="text-blue-600">C&L </span>
-                <span className="text-black/80">Proserve Inc.</span>
+              <span className="font-extrabold text-xl tracking-tight text-black/80">
+                JC&L Proserve Inc.
               </span>
             </div>
             <p className="text-muted-foreground leading-relaxed max-w-xs">
