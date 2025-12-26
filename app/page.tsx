@@ -318,7 +318,7 @@ export default function HomePage() {
                 <p className="text-sm font-medium italic text-muted-foreground">
                   &quot;The most professional staffing partner we've ever worked with. Excellence in every deployment."
                 </p>
-                <p className="mt-4 font-bold text-foreground">— Operations Manager, JC&L Proserve Inc.</p>
+                <p className="mt-4 font-bold text-foreground">— CEO/ Managing Partner, JC&L Proserve Inc.</p>
               </div>
             </div>
 
