@@ -17,7 +17,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import SplitText from "@/components/SplitText";
-// import Carousel from "@/components/ui/carousel";
 
 const handleAnimationComplete = () => {
   console.log("All letters have animated!");
@@ -354,32 +353,6 @@ export default function HomePage() {
       <section id="about" className="py-32 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
-            {/* <div className="relative">
-              <div className="absolute -top-10 -left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl opacity-60" />
-              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
-                <Image
-                  src="/ceo-solo.jpg"
-                  alt="Our Team"
-                  width={600}
-                  height={800}
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-10 -right-10 bg-white p-8 rounded-3xl shadow-2xl border max-w-70">
-                <div className="flex gap-1 mb-4">
-                  {[1, 2, 3, 4, 5].map((s) => (
-                    <div key={s} className="w-5 h-5 bg-yellow-400 rounded-sm" />
-                  ))}
-                </div>
-                <p className="text-sm font-medium italic text-muted-foreground">
-                  &quot;The most professional staffing partner we've ever worked
-                  with. Excellence in every deployment."
-                </p>
-                <p className="mt-4 font-bold text-foreground">
-                  — CEO/ Managing Partner, JC&L Proserve Inc.
-                </p>
-              </div>
-            </div> */}
             <div className="relative w-full max-w-md mx-auto">
               {/* Background blur circle */}
               <div className="absolute -top-12 -left-12 w-96 h-96 bg-primary/10 rounded-full blur-3xl opacity-60" />
@@ -439,7 +412,7 @@ export default function HomePage() {
                 </h3>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   Our rigorous selection process ensures that every candidate we
-                  provide isn't just qualified, but also aligns with your
+                  provide isn&apos;t just qualified, but also aligns with your
                   company&apos;s culture and values.
                 </p>
               </div>
