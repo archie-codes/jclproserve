@@ -16,6 +16,12 @@ import {
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
+import SplitText from "@/components/SplitText";
+
+const handleAnimationComplete = () => {
+  console.log("All letters have animated!");
+};
+
 function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -137,7 +143,25 @@ export default function HomePage() {
               Top-Tier Staffing Solutions
             </div>
             <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.1] text-white tracking-tight">
-              Elevating <span className="text-green-600 italic">Workforce</span>{" "}
+              Elevating
+              <br />
+              <span className="text-green-600 italic">
+                <SplitText
+                  text="Workforce"
+                  className="text-5xl md:text-7xl font-extrabold text-center"
+                  delay={100}
+                  duration={0.6}
+                  ease="power3.out"
+                  splitType="chars"
+                  from={{ opacity: 0, y: 40 }}
+                  to={{ opacity: 1, y: 0 }}
+                  threshold={0.1}
+                  rootMargin="-100px"
+                  textAlign="center"
+                  onLetterAnimationComplete={handleAnimationComplete}
+                />
+                <br />
+              </span>{" "}
               Standards Globally
             </h1>
             <p className="text-lg md:text-xl text-blue-100/80 leading-relaxed max-w-lg">
@@ -157,7 +181,7 @@ export default function HomePage() {
                 size="lg"
                 className="rounded-full px-8 h-14 text-base font-bold bg-white/5 border-white/20 text-white hover:bg-white hover:text-blue-950 backdrop-blur-sm"
               >
-                Join our Network
+                Join our Team
               </Button>
             </div>
 
@@ -316,40 +340,62 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="text-sm font-medium italic text-muted-foreground">
-                  &quot;The most professional staffing partner we've ever worked with. Excellence in every deployment."
+                  &quot;The most professional staffing partner we've ever worked
+                  with. Excellence in every deployment."
                 </p>
-                <p className="mt-4 font-bold text-foreground">— CEO/ Managing Partner, JC&L Proserve Inc.</p>
+                <p className="mt-4 font-bold text-foreground">
+                  — CEO/ Managing Partner, JC&L Proserve Inc.
+                </p>
               </div>
             </div>
 
             <div className="space-y-12">
               <div>
-                <h2 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-4">The Advantage</h2>
+                <h2 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-4">
+                  The Advantage
+                </h2>
                 <h3 className="text-4xl font-extrabold tracking-tight mb-6 leading-tight">
                   Beyond Just Hiring—
                   <br />
                   We Build Partnerships
                 </h3>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Our rigorous selection process ensures that every candidate we provide isn't just qualified, but also
-                  aligns with your company&apos;s culture and values.
+                  Our rigorous selection process ensures that every candidate we
+                  provide isn't just qualified, but also aligns with your
+                  company&apos;s culture and values.
                 </p>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-8">
                 {[
-                  { title: "Licensed & Compliant", desc: "Full adherence to labor laws and safety standards." },
-                  { title: "Fast Deployment", desc: "Rapid response to urgent staffing needs." },
-                  { title: "Vetted Talent", desc: "Comprehensive background checks and skills testing." },
-                  { title: "Managed Payroll", desc: "We handle the administrative heavy lifting." },
+                  {
+                    title: "Licensed & Compliant",
+                    desc: "Full adherence to labor laws and safety standards.",
+                  },
+                  {
+                    title: "Fast Deployment",
+                    desc: "Rapid response to urgent staffing needs.",
+                  },
+                  {
+                    title: "Vetted Talent",
+                    desc: "Comprehensive background checks and skills testing.",
+                  },
+                  {
+                    title: "Managed Payroll",
+                    desc: "We handle the administrative heavy lifting.",
+                  },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4">
                     <div className="mt-1 shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600">
                       <CheckCircle2 size={16} />
                     </div>
                     <div>
-                      <h4 className="font-bold text-foreground mb-1">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground">{item.desc}</p>
+                      <h4 className="font-bold text-foreground mb-1">
+                        {item.title}
+                      </h4>
+                      <p className="text-sm text-muted-foreground">
+                        {item.desc}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -359,7 +405,7 @@ export default function HomePage() {
                 size="lg"
                 className="rounded-full px-8 h-14 bg-blue-600 text-background hover:bg-foreground/90 transition-all hover:shadow-lg"
               >
-                Our Selection Process
+                View More
               </Button>
             </div>
           </div>
