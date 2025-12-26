@@ -47,19 +47,17 @@ function Navbar() {
           </div>
           <span
             className={`font-bold text-xl tracking-tight transition-colors ${
-              scrolled ? "text-foreground" : "text-white"
+              scrolled ? "text-black" : "text-white"
             }`}
           >
-            <span className="text-green-600">J</span>
-            <span className="text-blue-600">C&L </span>
-            <span className="text-black/80">Proserve Inc.</span>
+            JC&L Proserve Inc.
           </span>
         </Link>
 
         {/* Desktop Menu */}
         <nav
           className={`hidden md:flex items-center gap-10 text-sm font-semibold transition-colors ${
-            scrolled ? "text-muted-foreground" : "text-white/90"
+            scrolled ? "text-black/80" : "text-white/90"
           }`}
         >
           {["Home", "Services", "Jobs", "About"].map((item) => (
@@ -139,7 +137,7 @@ export default function HomePage() {
               Top-Tier Staffing Solutions
             </div>
             <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.1] text-white tracking-tight">
-              Elevating <span className="text-blue-600 italic">Workforce</span>{" "}
+              Elevating <span className="text-green-600 italic">Workforce</span>{" "}
               Standards Globally
             </h1>
             <p className="text-lg md:text-xl text-blue-100/80 leading-relaxed max-w-lg">
@@ -297,14 +295,14 @@ export default function HomePage() {
       </section>
 
       {/* WHY CHOOSE US - Feature-rich section with modern layout */}
-      {/* <section id="about" className="py-32 bg-white overflow-hidden">
+      <section id="about" className="py-32 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="relative">
               <div className="absolute -top-10 -left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl opacity-60" />
               <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
                 <Image
-                  src="/diverse-group-of-professional-workers-smiling.jpg"
+                  src="/ceo-solo.jpg"
                   alt="Our Team"
                   width={600}
                   height={800}
@@ -318,9 +316,9 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="text-sm font-medium italic text-muted-foreground">
-                  "The most professional staffing partner we've ever worked with. Excellence in every deployment."
+                  &quot;The most professional staffing partner we've ever worked with. Excellence in every deployment."
                 </p>
-                <p className="mt-4 font-bold text-foreground">— Director, Global Logistics</p>
+                <p className="mt-4 font-bold text-foreground">— Operations Manager, JC&L Proserve Inc.</p>
               </div>
             </div>
 
@@ -334,7 +332,7 @@ export default function HomePage() {
                 </h3>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   Our rigorous selection process ensures that every candidate we provide isn't just qualified, but also
-                  aligns with your company's culture and values.
+                  aligns with your company&apos;s culture and values.
                 </p>
               </div>
 
@@ -359,14 +357,14 @@ export default function HomePage() {
 
               <Button
                 size="lg"
-                className="rounded-full px-8 h-14 bg-foreground text-background hover:bg-foreground/90 transition-all hover:shadow-lg"
+                className="rounded-full px-8 h-14 bg-blue-600 text-background hover:bg-foreground/90 transition-all hover:shadow-lg"
               >
                 Our Selection Process
               </Button>
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* CALL TO ACTION - Bold, immersive section */}
       {/* <section id="jobs" className="px-6 py-20">
