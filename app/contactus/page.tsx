@@ -9,7 +9,6 @@ import {
   Phone,
   MapPin,
   Clock,
-  Send,
   Linkedin,
   Facebook,
   Twitter,
