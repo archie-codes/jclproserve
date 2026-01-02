@@ -9,7 +9,6 @@ import {
   ArrowRight,
   CheckCircle2,
   Users,
-  House,
   BrushCleaning,
   Armchair,
   Phone,
@@ -201,20 +200,19 @@ export default function HomePage() {
               bridge the gap between exceptional talent and visionary companies.
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
-              <Button
-                size="lg"
-                className="rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-primary/20 bg-blue-600 hover:bg-blue-700 group"
+              <Link
+                href="/jobs"
+                className="inline-flex items-center justify-center rounded-full px-8 h-14 text-base font-bold shadow-xl text-white shadow-primary/20 bg-blue-600 hover:bg-blue-700 group"
               >
                 Apply For Jobs
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="rounded-full px-8 h-14 text-base font-bold bg-white/5 border-white/20 text-white hover:bg-white hover:text-blue-950 backdrop-blur-sm"
+              </Link>
+              <Link
+                href="#"
+                className="inline-flex items-center justify-center rounded-full px-8 h-14 text-base font-bold bg-white/5 border-white/20 text-white hover:bg-white hover:text-blue-950 backdrop-blur-sm"
               >
-                Partnet With Us
-              </Button>
+                Partner With Us
+              </Link>
             </div>
 
             <div className="flex items-center gap-8 pt-8 border-t border-white/10">
