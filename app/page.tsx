@@ -119,14 +119,20 @@ function Navbar() {
       {open && (
         <div className="md:hidden absolute top-full left-0 w-full bg-background border-b animate-in slide-in-from-top duration-300">
           <nav className="flex flex-col px-6 py-8 space-y-6 text-lg font-medium">
-            {["Home", "Services", "Jobs", "About", "Contact"].map((item) => (
+            {[
+              { name: "Home", href: "/" },
+              { name: "Services", href: "/services" },
+              { name: "Jobs", href: "/jobs" },
+              { name: "About", href: "/aboutus" },
+              { name: "Contact", href: "/contactus" },
+            ].map((item) => (
               <Link
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.name}
+                href={item.href}
                 onClick={() => setOpen(false)}
                 className="hover:text-primary transition-colors"
               >
-                {item}
+                {item.name}
               </Link>
             ))}
           </nav>
