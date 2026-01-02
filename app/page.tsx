@@ -9,9 +9,10 @@ import {
   ArrowRight,
   CheckCircle2,
   Users,
-  Briefcase,
-  Shield,
-  Zap,
+  House,
+  BrushCleaning,
+  Armchair,
+  Phone,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -63,7 +64,7 @@ function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center text-primary-foreground font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center text-primary-foreground font-bold text-xl group-hover:scale-105 transition-transform">
             <Image
               src="/jcl-logo.png"
               alt="Logo"
@@ -96,12 +97,12 @@ function Navbar() {
               {item}
             </Link>
           ))}
-          <Button
-            size="sm"
-            className="rounded-full px-6 bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/30"
+          <Link
+            href="contactus"
+            className=" px-4 py-2 rounded-full bg-blue-600 text-primary-foreground font-bold hover:bg-blue-700 transition-colors"
           >
             Contact Us
-          </Button>
+          </Link>
         </nav>
 
         {/* Mobile Button */}
@@ -204,7 +205,7 @@ export default function HomePage() {
                 size="lg"
                 className="rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-primary/20 bg-blue-600 hover:bg-blue-700 group"
               >
-                Find Talent
+                Apply For Jobs
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button
@@ -212,7 +213,7 @@ export default function HomePage() {
                 size="lg"
                 className="rounded-full px-8 h-14 text-base font-bold bg-white/5 border-white/20 text-white hover:bg-white hover:text-blue-950 backdrop-blur-sm"
               >
-                Join our Team
+                Partnet With Us
               </Button>
             </div>
 
@@ -286,9 +287,9 @@ export default function HomePage() {
               <h2 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-4">
                 Core Expertise
               </h2>
-              <p className="text-4xl md:text-5xl font-extrabold text-foreground tracking-tight leading-tight">
+              <p className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight leading-tight">
                 Specialized Manpower for{" "}
-                <span className="text-primary italic underline decoration-blue-100 underline-offset-8">
+                <span className="text-green-600 italic underline decoration-blue-100 underline-offset-8">
                   Every Industry
                 </span>
               </p>
@@ -299,27 +300,32 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: "Janitorial",
+                title: "Janitorial Support Services",
                 desc: "Expert sanitation and facility maintenance services.",
-                icon: Shield,
+                icon: BrushCleaning,
               },
               {
-                title: "Construction",
-                desc: "Skilled labor and safety-certified engineering support.",
-                icon: Zap,
+                title: "Recruitment and Staffing",
+                desc: "Tailored hiring solutions for diverse business needs.",
+                icon: Armchair,
               },
               {
-                title: "Office Staff",
-                desc: "Professional administrative and executive personnel.",
+                title: "Manpower Services",
+                desc: "Comprehensive staffing solutions across various sectors.",
                 icon: Users,
               },
               {
-                title: "Warehouse",
-                desc: "Efficient logistics and inventory management teams.",
-                icon: Briefcase,
+                title: "Workforce Outsourcing Solutions",
+                desc: "Flexible outsourcing to optimize your workforce management.",
+                icon: Phone,
+              },
+              {
+                title: "Deployment of skilled and semi-skilled workers",
+                desc: "Skilled labor for production and assembly lines.",
+                icon: Users,
               },
             ].map((service, i) => (
               <Card
@@ -327,7 +333,7 @@ export default function HomePage() {
                 className="group hover:shadow-2xl transition-all duration-500 border-none bg-white rounded-[2rem] overflow-hidden"
               >
                 <CardContent className="p-10 space-y-6">
-                  <div className="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                  <div className="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center transition-colors group-hover:bg-blue-600 group-hover:text-primary-foreground">
                     <service.icon size={32} />
                   </div>
                   <div className="space-y-3">
@@ -452,12 +458,12 @@ export default function HomePage() {
                 ))}
               </div>
 
-              <Button
-                size="lg"
-                className="rounded-full px-8 h-14 bg-blue-600 text-background hover:bg-foreground/90 transition-all hover:shadow-lg"
+              <Link
+                href="/aboutus"
+                className="inline-flex items-center justify-center font-extrabold rounded-full h-14 px-8 bg-blue-600 text-background hover:bg-blue-700 transition-all hover:shadow-lg"
               >
                 View More
-              </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -469,143 +475,47 @@ export default function HomePage() {
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
           <div className="relative z-10 space-y-8 max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-6xl font-black text-white leading-tight">
-              Ready to <span className="text-green-600 italic">Transform</span> Your Workforce?
+              Ready to <span className="text-green-600 italic">Transform</span>{" "}
+              Your Workforce?
             </h2>
             <p className="text-xl text-blue-100/70 max-w-xl mx-auto font-medium">
-              Join hundreds of industry leaders who trust us with their most valuable asset—their people.
+              Join hundreds of industry leaders who trust us with their most
+              valuable asset—their people.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-              <Button
-                size="lg"
-                className="w-full sm:w-auto rounded-full px-12 h-16 text-lg font-extrabold shadow-2xl shadow-primary/40 bg-green-600 hover:bg-primary/90"
+              <Link
+                href="/jobs"
+                className="w-full sm:w-auto h-16 px-12
+               flex items-center justify-center
+               text-lg font-extrabold
+               rounded-full
+               text-white
+               shadow-2xl shadow-primary/40
+               bg-green-600
+               hover:bg-white hover:text-green-600
+               transition-colors"
               >
                 Partner With Us
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto rounded-full px-12 h-16 text-lg font-extrabold border-white/20 text-white hover:bg-white hover:text-blue-950 backdrop-blur-sm bg-transparent"
+              </Link>
+
+              <Link
+                href="/jobs"
+                className="w-full sm:w-auto h-16 px-12
+               flex items-center justify-center
+               text-lg font-extrabold
+               rounded-full
+               border border-white/20
+               text-white
+               bg-white/10 backdrop-blur-sm
+               hover:bg-white hover:text-blue-600
+               transition-colors"
               >
                 Apply for Jobs
-              </Button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
-
-      {/* FOOTER - Clean, authoritative layout */}
-      <footer className="bg-slate-50 border-t py-20">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-          <div className="space-y-6">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center text-primary-foreground font-bold shadow-md">
-                <Image
-                  src="/jcl-logo.png"
-                  alt="Logo"
-                  width={40}
-                  height={40}
-                  className="bg-transparent"
-                />
-              </div>
-              <span className="font-extrabold text-xl tracking-tight text-black/80">
-                JC&L Proserve Inc.
-              </span>
-            </div>
-            <p className="text-muted-foreground leading-relaxed max-w-xs">
-              Setting the global standard in professional staffing and manpower
-              management since 2025.
-            </p>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-foreground mb-6 uppercase tracking-widest text-xs">
-              Quick Links
-            </h4>
-            <ul className="space-y-4 text-sm font-medium text-muted-foreground">
-              {[
-                "Find Talent",
-                "Apply for Job",
-                "Our Expertise",
-                "Case Studies",
-                "Contact Us",
-              ].map((l) => (
-                <li key={l}>
-                  <Link
-                    href="#"
-                    className="hover:text-primary transition-colors"
-                  >
-                    {l}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-foreground mb-6 uppercase tracking-widest text-xs">
-              Company
-            </h4>
-            <ul className="space-y-4 text-sm font-medium text-muted-foreground">
-              {[
-                "About Us",
-                "Our Culture",
-                "Careers",
-                "Legal & Compliance",
-                "Privacy Policy",
-              ].map((l) => (
-                <li key={l}>
-                  <Link
-                    href="#"
-                    className="hover:text-primary transition-colors"
-                  >
-                    {l}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-foreground mb-6 uppercase tracking-widest text-xs">
-              Connect
-            </h4>
-            <div className="space-y-4 text-sm text-muted-foreground">
-              <p className="flex items-center gap-2">
-                📍 12 Olandis Street Mercado Hagonoy, Bulacan 3002
-              </p>
-              <p className="flex items-center gap-2">📞 0994 843 0972</p>
-              <p className="flex items-center gap-2">
-                ✉️ louiemaglalang.jclproserve@gmail.com
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto px-6 pt-20 mt-20 border-t flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground font-medium">
-            © {new Date().getFullYear()} JC&L Proserve Inc. All rights reserved.
-          </p>
-          <div className="flex gap-6">
-            <Link
-              href="#"
-              className="text-xs font-bold text-muted-foreground hover:text-primary uppercase tracking-widest"
-            >
-              LinkedIn
-            </Link>
-            <Link
-              href="#"
-              className="text-xs font-bold text-muted-foreground hover:text-primary uppercase tracking-widest"
-            >
-              Twitter
-            </Link>
-            <Link
-              href="#"
-              className="text-xs font-bold text-muted-foreground hover:text-primary uppercase tracking-widest"
-            >
-              Instagram
-            </Link>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }

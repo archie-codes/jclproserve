@@ -55,6 +55,7 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.147 0.004 49.25);
   --primary: oklch(0.216 0.006 56.043);
+  /* --primary: oklch(0.45 0.18 250); */
   --primary-foreground: oklch(0.985 0.001 106.423);
   --secondary: oklch(0.97 0.001 106.424);
   --secondary-foreground: oklch(0.216 0.006 56.043);
@@ -123,3 +124,5 @@
     @apply bg-background text-foreground;
   }
 }
+
+
