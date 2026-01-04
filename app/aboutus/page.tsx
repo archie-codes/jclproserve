@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import {
-  ArrowRight,
   ChevronLeft,
   Target,
   Eye,
@@ -15,6 +14,7 @@ import {
   Globe,
 } from "lucide-react";
 import Image from "next/image";
+
 
 export default function MissionPage() {
   const coreValues = [
@@ -60,12 +60,7 @@ export default function MissionPage() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-10 h-10 rounded-xl flex items-center justify-center text-blue-600-foreground font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
-              <Image
-                src="/jcl-logo.png"
-                alt="Logo"
-                width={40}
-                height={40}
-              />
+              <Image src="/jcl-logo.png" alt="Logo" width={40} height={40} />
             </div>
             <span className="font-bold text-xl tracking-tight text-foreground">
               JC&L Proserve Inc.
@@ -249,8 +244,9 @@ export default function MissionPage() {
                 size="lg"
                 className="w-full sm:w-auto rounded-full px-12 h-16 text-lg font-extrabold shadow-2xl shadow-blue bg-blue-600 hover:bg-blue-600/90 group"
               >
-                Partner With Us
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <Link href="/partnerwithus">
+                  Partner With Us
+                </Link>
               </Button>
             </div>
           </div>

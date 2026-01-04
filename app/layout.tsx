@@ -115,7 +115,7 @@ export default function RootLayout({
                   Kalayaan Village Service Road, Quebiawan, City of San Fernando
                   Pampanga
                 </p>
-                <p className="flex items-center gap-2">+63 (994) 843-0972</p>
+                <p className="flex items-center gap-2">+63 (993) 190-8150</p>
                 <p className="flex items-center gap-2">
                   hr.jclproserve@gmail.com
                 </p>
@@ -145,6 +145,18 @@ export default function RootLayout({
                 className="text-xs font-bold text-muted-foreground hover:text-primary uppercase tracking-widest"
               >
                 Indeed
+              </Link>
+              <Link
+                href="#"
+                className="text-xs font-bold text-muted-foreground hover:text-primary uppercase tracking-widest"
+              >
+                Jobstreet
+              </Link>
+              <Link
+                href="#"
+                className="text-xs font-bold text-muted-foreground hover:text-primary uppercase tracking-widest"
+              >
+                Linkedin
               </Link>
             </div>
           </div>

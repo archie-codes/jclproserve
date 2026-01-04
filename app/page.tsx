@@ -1,21 +1,13 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
-import {
-  Menu,
-  X,
-  ArrowRight,
-  CheckCircle2,
-  Users,
-  BrushCleaning,
-  Armchair,
-  Phone,
-} from "lucide-react";
+import { Menu, X, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import SplitText from "@/components/SplitText";
+
+import ServicesSection from "@/components/ServicesSection";
 
 const handleAnimationComplete = () => {
   console.log("All letters have animated!");
@@ -45,6 +37,13 @@ const testimonials = [
 function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const navItems = [
+    { label: "Home", href: "/" }, // your homepage
+    { label: "Services", href: "/#our-services" }, // scroll to section on homepage
+    { label: "Jobs", href: "/#jobs" }, // another page
+    { label: "About", href: "/#about" }, // scroll to about section
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -86,18 +85,20 @@ function Navbar() {
             scrolled ? "text-black/80" : "text-white/90"
           }`}
         >
-          {["Home", "Services", "Jobs", "About"].map((item) => (
+          {navItems.map((item) => (
             <Link
-              key={item}
-              href={`#${item.toLowerCase()}`}
+              key={item.label}
+              href={item.href}
               className="hover:text-primary transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
             >
-              {item}
+              {item.label}
+              
             </Link>
           ))}
+
           <Link
-            href="contactus"
-            className=" px-4 py-2 rounded-full bg-blue-600 text-primary-foreground font-bold hover:bg-blue-700 transition-colors"
+            href="/contactus"
+            className="px-4 py-2 rounded-full bg-blue-600 text-primary-foreground font-bold hover:bg-blue-700 transition-colors"
           >
             Contact Us
           </Link>
@@ -283,21 +284,21 @@ export default function HomePage() {
       </section>
 
       {/* SERVICES SECTION - Redesigned with icon-driven grid and glassmorphism */}
-      <section id="services" className="py-32 relative bg-slate-50/50">
+      {/* <section id="services" className="py-32 relative bg-slate-50/50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="max-w-2xl">
-              <h2 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-4">
+              <h2 className="text-sm font-black text-blue-900 uppercase tracking-[0.2em] mb-4">
                 Core Expertise
               </h2>
-              <p className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight leading-tight">
+              <p className="text-4xl md:text-5xl font-extrabold text-blue-900 tracking-tight leading-tight">
                 Specialized Manpower for{" "}
                 <span className="text-green-600 italic underline decoration-blue-100 underline-offset-8">
                   Every Industry
                 </span>
               </p>
             </div>
-            <p className="text-muted-foreground max-w-sm text-lg leading-relaxed">
+            <p className="text-slate-600 max-w-sm text-lg leading-relaxed">
               We provide tailored workforce solutions that integrate seamlessly
               with your operational requirements.
             </p>
@@ -306,48 +307,60 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: "Janitorial Support Services",
+                title: "Janitorial Services",
                 desc: "Expert sanitation and facility maintenance services.",
-                icon: BrushCleaning,
+                icon: Brush, // Note: Changed from BrushCleaning to Brush for standard Lucide support
+                link: "/partnerwithus#our-services",
               },
               {
                 title: "Recruitment and Staffing",
                 desc: "Tailored hiring solutions for diverse business needs.",
                 icon: Armchair,
+                link: "/partnerwithus#our-services",
               },
               {
                 title: "Manpower Services",
                 desc: "Comprehensive staffing solutions across various sectors.",
                 icon: Users,
+                link: "/partnerwithus#our-services",
               },
               {
-                title: "Workforce Outsourcing Solutions",
+                title: "Workforce Outsourcing",
                 desc: "Flexible outsourcing to optimize your workforce management.",
                 icon: Phone,
+                link: "/partnerwithus#our-services",
               },
               {
-                title: "Deployment of skilled and semi-skilled workers",
+                title: "Skilled Deployment",
                 desc: "Skilled labor for production and assembly lines.",
                 icon: Users,
+                link: "/partnerwithus#our-services",
               },
+              // {
+              //   title: "Facility Management",
+              //   desc: "Comprehensive onsite management and technical support.",
+              //   icon: Building2,
+              // },
             ].map((service, i) => (
               <Card
                 key={i}
                 className="group hover:shadow-2xl transition-all duration-500 border-none bg-white rounded-[2rem] overflow-hidden"
               >
                 <CardContent className="p-10 space-y-6">
-                  <div className="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center transition-colors group-hover:bg-blue-600 group-hover:text-primary-foreground">
+                  <div className="w-16 h-16 bg-blue-50 text-blue-900 rounded-2xl flex items-center justify-center transition-colors group-hover:bg-blue-600 group-hover:text-white">
                     <service.icon size={32} />
                   </div>
                   <div className="space-y-3">
-                    <h3 className="text-2xl font-bold">{service.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <h3 className="text-2xl font-bold text-blue-900">
+                      {service.title}
+                    </h3>
+                    <p className="text-slate-500 leading-relaxed">
                       {service.desc}
                     </p>
                   </div>
                   <Link
-                    href="#"
-                    className="inline-flex items-center text-sm font-bold text-primary group-hover:translate-x-1 transition-transform"
+                    href={service.link}
+                    className="inline-flex items-center text-sm font-bold text-blue-900 group-hover:translate-x-1 transition-transform"
                   >
                     Learn more <ArrowRight className="ml-1 w-4 h-4" />
                   </Link>
@@ -356,7 +369,8 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
+      <ServicesSection />
 
       {/* WHY CHOOSE US - Feature-rich section with modern layout */}
       <section id="about" className="py-32 bg-white overflow-hidden">

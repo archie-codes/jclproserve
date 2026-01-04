@@ -55,13 +55,12 @@ export default function ContactPage() {
       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-blue-600-foreground font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-blue-600-foreground font-bold text-xl group-hover:scale-105 transition-transform">
               <Image
                 src="/jcl-logo.png"
                 alt="Logo"
                 width={40}
                 height={40}
-                className="bg-transparent"
               />
             </div>
             <span className="font-bold text-xl tracking-tight text-foreground">

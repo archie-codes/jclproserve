@@ -33,10 +33,24 @@ import { toast } from "sonner";
 import Link from "next/link";
 import Image from "next/image";
 import { FormEvent, useState } from "react";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import ServicesSection from "@/components/ServicesSection";
+
 
 export default function PartnerWithUsPage() {
   const [result, setResult] = useState("");
+
+
+  // State for the form message (to pre-fill it)
+  const [formMessage, setFormMessage] = useState("");
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -63,19 +77,19 @@ export default function PartnerWithUsPage() {
     }
   };
 
+
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
       {/* NAVIGATION HEADER */}
       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-blue-600-foreground font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-blue-600-foreground font-bold text-xl group-hover:scale-105 transition-transform">
               <Image
                 src="/jcl-logo.png"
                 alt="Logo"
                 width={40}
                 height={40}
-                className="bg-transparent"
               />
             </div>
             <span className="font-bold text-xl tracking-tight text-foreground">
@@ -119,6 +133,11 @@ export default function PartnerWithUsPage() {
               variant="outline"
               size="lg"
               className="border-emerald-400 text-emerald-100 hover:bg-emerald-900/50 hover:text-white"
+              onClick={() =>
+                document
+                  .getElementById("our-services")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
             >
               View Our Services
             </Button>
@@ -201,6 +220,10 @@ export default function PartnerWithUsPage() {
         </div>
       </section>
 
+      {/* --- SERVICES SECTION WITH MODAL --- */}
+
+      <ServicesSection />
+
       {/* --- FORM SECTION --- */}
       <section id="partner-form" className="py-24 bg-white">
         <div className="container mx-auto px-4">
@@ -245,6 +268,7 @@ export default function PartnerWithUsPage() {
                     <p className="text-sm text-slate-500">
                       hr.jclproserve@gmail.com
                     </p>
+                    <p className="text-sm text-slate-500">+63 (993) 190-8150</p>
                   </div>
                 </div>
               </div>
@@ -269,8 +293,9 @@ export default function PartnerWithUsPage() {
                         <Input
                           id="firstName"
                           name="Name"
-                          placeholder="John"
+                          placeholder="Juan"
                           className="border-slate-300 focus:ring-teal-500"
+                          required
                         />
                       </div>
                       <div className="space-y-2">
@@ -278,8 +303,9 @@ export default function PartnerWithUsPage() {
                         <Input
                           id="lastName"
                           name="Lastname"
-                          placeholder="Doe"
+                          placeholder="Dela Cruz"
                           className="border-slate-300 focus:ring-teal-500"
+                          required
                         />
                       </div>
                     </div>
@@ -291,6 +317,17 @@ export default function PartnerWithUsPage() {
                         name="Company"
                         placeholder="Acme Inc."
                         className="border-slate-300 focus:ring-teal-500"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Phone Number</Label>
+                      <Input
+                        id="phone"
+                        name="Phone"
+                        placeholder="+63 (993) 123-4561"
+                        className="border-slate-300 focus:ring-teal-500"
+                        required
                       />
                     </div>
 
@@ -302,12 +339,13 @@ export default function PartnerWithUsPage() {
                         name="Email"
                         placeholder="john@company.com"
                         className="border-slate-300 focus:ring-teal-500"
+                        required
                       />
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="industry">Industry</Label>
-                      <Select name="Industry">
+                      <Select name="Industry" required>
                         <SelectTrigger className="border-slate-300">
                           <SelectValue placeholder="Select your industry" />
                         </SelectTrigger>
@@ -334,14 +372,15 @@ export default function PartnerWithUsPage() {
                       <Textarea
                         id="message"
                         name="Message"
+                        // BIND VALUE TO STATE
+                        value={formMessage}
+                        onChange={(e) => setFormMessage(e.target.value)}
                         placeholder="We are looking for 50 skilled nurses..."
                         className="min-h-30 border-slate-300 focus:ring-teal-500"
+                        required
                       />
                     </div>
 
-                    {/* <Button className="w-full rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 text-lg">
-                      Submit Inquiry <ArrowRight className="ml-2 w-5 h-5" />
-                    </Button> */}
                     <Button
                       type="submit"
                       disabled={result === "Sending...."}
@@ -430,7 +469,9 @@ export default function PartnerWithUsPage() {
                   </div>
                   <div>
                     <p className="font-semibold text-slate-900">Email Direct</p>
-                    <p className="text-sm text-slate-500">hr.jclproserve@gmail.com</p>
+                    <p className="text-sm text-slate-500">
+                      hr.jclproserve@gmail.com
+                    </p>
                   </div>
                 </a>
 
