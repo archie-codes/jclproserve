@@ -221,7 +221,6 @@ export default function PartnerWithUsPage() {
       </section>
 
       {/* --- SERVICES SECTION WITH MODAL --- */}
-
       <ServicesSection />
 
       {/* --- FORM SECTION --- */}
@@ -372,10 +371,9 @@ export default function PartnerWithUsPage() {
                       <Textarea
                         id="message"
                         name="Message"
-                        // BIND VALUE TO STATE
                         value={formMessage}
                         onChange={(e) => setFormMessage(e.target.value)}
-                        placeholder="We are looking for 50 skilled nurses..."
+                        placeholder="We are looking for 50 skilled staff..."
                         className="min-h-30 border-slate-300 focus:ring-teal-500"
                         required
                       />
