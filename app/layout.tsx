@@ -129,22 +129,22 @@ export default function RootLayout({
             </p>
             <div className="flex gap-6">
               <Link
-                href="#"
+                href="https://www.facebook.com/jclproserveinc/"
                 className="text-xs font-bold text-muted-foreground hover:text-primary uppercase tracking-widest"
               >
-                LinkedIn
+                Facebook
               </Link>
               <Link
                 href="#"
                 className="text-xs font-bold text-muted-foreground hover:text-primary uppercase tracking-widest"
               >
-                Twitter
+                Tiktok
               </Link>
               <Link
                 href="#"
                 className="text-xs font-bold text-muted-foreground hover:text-primary uppercase tracking-widest"
               >
-                Instagram
+                Indeed
               </Link>
             </div>
           </div>

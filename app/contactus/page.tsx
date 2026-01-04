@@ -124,7 +124,7 @@ export default function ContactPage() {
                           Call Us
                         </p>
                         <p className="text-md font-semibold">
-                          +63 (994) 843-0972
+                          +63 (993) 190-8150
                         </p>
                       </div>
                     </div>
@@ -308,7 +308,7 @@ export default function ContactPage() {
                       gap: "8px",
                       opacity: result === "Sending...." ? 0.5 : 1,
                     }}
-                    className="w-full md:w-auto px-10 h-12 text-lg rounded-full bg-blue-600 hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl"
+                    className="w-full px-10 h-12 text-lg rounded-full bg-blue-600 hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl"
                   >
                     {result === "Sending...." ? (
                       <>

@@ -213,7 +213,7 @@ export default function HomePage() {
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
-                href="#"
+                href="/partnerwithus"
                 className="inline-flex items-center justify-center rounded-full px-8 h-14 text-base font-bold bg-white/5 border-white/20 text-white hover:bg-white hover:text-blue-950 backdrop-blur-sm"
               >
                 Partner With Us
@@ -487,7 +487,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
               <Link
-                href="/jobs"
+                href="/partnerwithus"
                 className="w-full sm:w-auto h-16 px-12
                flex items-center justify-center
                text-lg font-extrabold
