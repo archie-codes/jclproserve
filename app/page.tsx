@@ -121,7 +121,7 @@ function Navbar() {
           <nav className="flex flex-col px-6 py-8 space-y-6 text-lg font-medium">
             {[
               { name: "Home", href: "/" },
-              { name: "Services", href: "/services" },
+              { name: "Services", href: "/partnerwithus#our-services" },
               { name: "Jobs", href: "/jobs" },
               { name: "About", href: "/aboutus" },
               { name: "Contact", href: "/contactus" },
