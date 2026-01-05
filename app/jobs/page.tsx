@@ -351,7 +351,225 @@
 //       </div>
 //     </main>
 //   );
+// // }
+// "use client";
+
+// import { useMemo, useState } from "react";
+// import {
+//   Dialog,
+//   DialogContent,
+//   DialogHeader,
+//   DialogTitle,
+//   DialogDescription,
+// } from "@/components/ui/dialog";
+// import { Input } from "@/components/ui/input";
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from "@/components/ui/select";
+// import { ChevronLeft } from "lucide-react";
+// import Link from "next/link";
+// import Image from "next/image";
+
+// type Job = {
+//   id: number;
+//   title: string;
+//   location: string;
+//   type: string;
+//   description: string;
+// };
+
+// const jobList: Job[] = [
+//   {
+//     id: 1,
+//     title: "Janitorial Position",
+//     location: "City of San Fernando, Pampanga",
+//     type: "Full-Time",
+//     description:
+//       "To maintain cleanliness and orderliness of assigned areas, ensuring a hygienic environment. Duties include sweeping, mopping, dusting, trash removal. May also assist with minor maintenance tasks. Must follow safety protocols and use cleaning equipment properly.",
+//   },
+//   {
+//     id: 2,
+//     title: "Production Staff",
+//     location: "City of San Fernando, Pampanga",
+//     type: "Full-Time",
+//     description:
+//       "To assist in the manufacturing process by operating machinery, assembling products. Responsibilities include quality control, packaging, and maintaining a safe work environment. Must follow production schedules and meet output targets. Attention to detail and teamwork are essential.",
+//   },
+// ];
+
+// export default function CareerList() {
+//   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+//   const [search, setSearch] = useState("");
+//   const [typeFilter, setTypeFilter] = useState<string>("all");
+
+//   /* 🔍 Filter Logic */
+//   const filteredJobs = useMemo(() => {
+//     return jobList.filter((job) => {
+//       const matchesSearch =
+//         job.title.toLowerCase().includes(search.toLowerCase()) ||
+//         job.location.toLowerCase().includes(search.toLowerCase());
+
+//       const matchesType = typeFilter === "all" || job.type === typeFilter;
+
+//       return matchesSearch && matchesType;
+//     });
+//   }, [search, typeFilter]);
+
+//   return (
+//     <main className="flex flex-col bg-background">
+//       {/* NAVIGATION HEADER */}
+//       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+//         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+//           <Link href="/" className="flex items-center gap-2 group">
+//             <div className="w-10 h-10 rounded-xl flex items-center justify-center text-blue-600-foreground font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
+//               <Image src="/jcl-logo.png" alt="Logo" width={40} height={40} />
+//             </div>
+//             <span className="font-bold text-xl tracking-tight text-foreground">
+//               JC&L Proserve Inc.
+//             </span>
+//           </Link>
+//           <Link
+//             href="/"
+//             className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-blue-600 transition-colors"
+//           >
+//             <ChevronLeft size={16} />
+//             Back to Home
+//           </Link>
+//         </div>
+//       </header>
+
+//       {/* --- JOB LISTING SECTION --- */}
+//       <section className="relative pt-8 pb-12 overflow-hidden ">
+//         <div className="max-w-7xl mx-auto px-6 relative z-10">
+//           {/* 🔎 Filters */}
+//           <div className="flex flex-col md:flex-row gap-4 mb-8 px-5">
+//             <Input
+//               placeholder="Search job title or location..."
+//               value={search}
+//               onChange={(e) => setSearch(e.target.value)}
+//               className="md:max-w-sm"
+//             />
+
+//             <Select value={typeFilter} onValueChange={setTypeFilter}>
+//               <SelectTrigger className="md:w-48">
+//                 <SelectValue placeholder="Employment Type" />
+//               </SelectTrigger>
+//               <SelectContent>
+//                 <SelectItem value="all">All Types</SelectItem>
+//                 <SelectItem value="Full-Time">Full-Time</SelectItem>
+//                 <SelectItem value="Part-Time">Part-Time</SelectItem>
+//                 <SelectItem value="Contract">Contract</SelectItem>
+//               </SelectContent>
+//             </Select>
+//           </div>
+
+//           {/* Job Cards */}
+//           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+//             {filteredJobs.map((job) => (
+//               <div
+//                 key={job.id}
+//                 className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all duration-300 flex flex-col justify-between group relative cursor-pointer overflow-hidden ring-1 ring-gray-900/5 transform hover:scale-105 hover:-translate-y-1 "
+//               >
+//                 <span className="absolute top-2 left-2 z-0 h-1 w-1 rounded-full bg-blue-600 transition-all duration-300 group-hover:scale-[180] -translate-y-4 -translate-x-4"></span>
+//                 <span className="absolute hidden top-2 left-2 h-14 w-14 place-items-center rounded-full bg-blue-600 transition-all duration-300 group-hover:bg-blue-600">
+//                   <svg
+//                     xmlns="http://www.w3.org/2000/svg"
+//                     viewBox="0 0 24 24"
+//                     fill="currentColor"
+//                     className="h-8 w-8 text-white transition-all"
+//                   >
+//                     <path
+//                       fillRule="evenodd"
+//                       d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z"
+//                       clipRule="evenodd"
+//                     />
+//                     <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 0 1-3 0V6.75Z" />
+//                   </svg>
+//                 </span>
+//                 {/* <h2 className="text-lg font-bold mb-1">{job.title}</h2>
+//                 <p className="text-sm text-muted-foreground mb-2">
+//                   {job.location} · {job.type}
+//                 </p>
+//                 <p className="text-sm text-gray-600">
+//                   {job.description.slice(0, 90)}...
+//                 </p>
+
+//                 <span className="inline-block mt-3 text-sm font-medium text-blue-600">
+//                   View Details →
+//                 </span> */}
+//                 <div>
+//                   <h2 className="text-xl font-bold text-gray-800 mb-1 group-hover:text-white relative font-sans group-hover:translate-x-4 transition-all duration-300 tracking-wide">
+//                     {job.title}
+//                   </h2>
+//                   <p className="text-sm text-gray-500 mb-2 group-hover:text-white relative font-sans flex align-middle transition-all duration-300 tracking-wide">
+//                     {job.location} · {job.type}
+//                   </p>
+//                   <p className="text-gray-700 text-sm mb-2 group-hover:text-white relative font-sans flex align-middle transition-all duration-300 tracking-wide">
+//                     {job.description.slice(0, 100)}...
+//                   </p>
+//                   <button
+//                     onClick={() => setSelectedJob(job)}
+//                     className="text-blue-400 text-sm font-medium hover:underline group-hover:text-white relative font-sans flex align-middle transition-all duration-300 tracking-wide"
+//                   >
+//                     View More
+//                   </button>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+
+//           {/* shadcn Dialog */}
+//           <Dialog
+//             open={!!selectedJob}
+//             onOpenChange={() => setSelectedJob(null)}
+//           >
+//             <DialogContent className="max-w-lg">
+//               {selectedJob && (
+//                 <>
+//                   <DialogHeader>
+//                     <DialogTitle>{selectedJob.title}</DialogTitle>
+//                     <DialogDescription>
+//                       {selectedJob.location} · {selectedJob.type}
+//                     </DialogDescription>
+//                   </DialogHeader>
+
+//                   <p className="text-sm text-muted-foreground mt-4">
+//                     {selectedJob.description}
+//                   </p>
+
+//                   <div className="flex flex-col gap-3 mt-6">
+//                     <a
+//                       href={`https://mail.google.com/mail/?view=cm&fs=1&to=hr.jclproserve@gmail.com&su=Application for ${encodeURIComponent(
+//                         selectedJob.title
+//                       )}`}
+//                       target="_blank"
+//                       rel="noopener noreferrer"
+//                       className="w-full text-center rounded-full bg-blue-600 text-white py-2 font-semibold hover:bg-blue-700 transition"
+//                     >
+//                       Apply via Gmail
+//                     </a>
+
+//                     <p className="text-xs text-center text-muted-foreground">
+//                       Or send your resume to{" "}
+//                       <span className="font-medium">
+//                         hr.jclproserve@gmail.com
+//                       </span>
+//                     </p>
+//                   </div>
+//                 </>
+//               )}
+//             </DialogContent>
+//           </Dialog>
+//         </div>
+//       </section>
+//     </main>
+//   );
 // }
+
 "use client";
 
 import { useMemo, useState } from "react";
@@ -370,34 +588,87 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ChevronLeft } from "lucide-react";
+import {
+  ChevronLeft,
+  MapPin,
+  Clock,
+  Briefcase,
+  CheckCircle2,
+  ListChecks,
+} from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 
+// 1. Updated Type Definition to include specific arrays
 type Job = {
   id: number;
   title: string;
   location: string;
   type: string;
   description: string;
+  responsibilities: string[]; // The "Job Task"
+  qualifications: string[]; // The "Qualification"
+  experience?: string[]; // Optional "Experience" section
 };
 
+// 2. Updated Data with rich details
 const jobList: Job[] = [
   {
     id: 1,
-    title: "Janitorial Position",
+    title: "Housekeeping Utility/Messenger Staff",
     location: "City of San Fernando, Pampanga",
     type: "Full-Time",
     description:
-      "To maintain cleanliness and orderliness of assigned areas, ensuring a hygienic environment. Duties include sweeping, mopping, dusting, trash removal. May also assist with minor maintenance tasks. Must follow safety protocols and use cleaning equipment properly.",
+      "Housekeeping Utility / Messenger staff are responsible for maintaining cleanliness, hygiene, and basic upkeep of the workplace, as well as performing errands and internal communications. They ensure a clean, safe, and organized environment while supporting smooth daily operations of the organization.",
+    responsibilities: [
+      "Cleaning & Maintenance – Sweep, mop, dust, and maintain cleanliness in offices, corridors, and common areas.",
+      "Sanitation & Hygiene – Ensure washrooms, pantries, and other facilities are clean and hygienic.",
+      "Waste Management – Collect and dispose of waste in designated areas.",
+      "Support Services – Assist staff with office tasks, moving files, and carrying materials.",
+      "Inventory Assistance – Help monitor and replenish cleaning and office supplies.",
+      "Safety & Compliance – Report hazards, maintain equipment, and follow workplace safety protocols.",
+    ],
+    qualifications: [
+      "At least High School Graduate/Vocational/College Under Graduate or Graduate.",
+      "With NCII in Housekeeping is an Advantage.",
+      "Physical fitness and stamina for cleaning, lifting, and walking.",
+      "Basic knowledge of cleaning tools, equipment, and hygiene standards.",
+      "Time management and reliability.",
+      "Good communication skills for messenger duties.",
+      "Ability to follow instructions and work independently.",
+      "Must be willing to relocate.",
+    ],
+    experience: [
+      "Prior experience in housekeeping, janitorial work, or messenger services.",
+      "Familiarity with workplace safety and sanitation practices.",
+    ],
   },
   {
     id: 2,
-    title: "Production Staff",
+    title: "Human Resource Staff",
     location: "City of San Fernando, Pampanga",
     type: "Full-Time",
     description:
-      "To assist in the manufacturing process by operating machinery, assembling products. Responsibilities include quality control, packaging, and maintaining a safe work environment. Must follow production schedules and meet output targets. Attention to detail and teamwork are essential.",
+      "The HR Staff will oversee the full spectrum of HR functions: recruitment, performance, employee relations, policy, compliance, and culture. This is a key role in creating a structured, fair planning, recruiting, and managing manpower to ensure the organization has a competent and efficient workforce aligned with operational and strategic objectives.",
+    responsibilities: [
+      "Manpower Planning - Forecasting workforce needs to ensure the right number of employees with the required skills are available skills are available.",
+      "Recruitment and Selection - Attracting, screening, and hiring suitable candidates to fill organizational positions.",
+      "Deployment and Placement - Assigning employees to roles that match their skills and organizational requirements.",
+      "Training and Development - Enhancing employee skills and knowledge to improve performance and productivity.",
+      "Performance Management - Monitoring, evaluating, and improving employee performance.",
+      "Employee Relations - Maintaining positive relationships between employees and management.",
+      "Compensation and Benefits Management - Administering salaries, benefits, and incentives fairly and competitively.",
+      "Compliance and Record Management - Ensuring adherence to labor laws and maintaining accurate manpower records.",
+    ],
+    qualifications: [
+      "Bachelor’s degree in HR, Business Administration, or related field (Open for Fresh Graduates)",
+      "Master’s degree or HR specialization (for senior roles, optional)",
+      "Professional HR certifications (e.g., SHRM, PHR, CIPD)",
+      "Knowledge of labor laws and HR policies",
+      "Strong communication, interpersonal, and problem-solving skills",
+      "Relevant work experience (internship for entry-level; 2–5+ years for mid/senior roles)",
+      "Proficiency in HRIS systems and Microsoft Office tools",
+      "Ability to lead with empathy, integrity, and strategic insight",
+    ],
   },
 ];
 
@@ -420,21 +691,23 @@ export default function CareerList() {
   }, [search, typeFilter]);
 
   return (
-    <main className="flex flex-col bg-background">
+    <main className="flex flex-col min-h-screen bg-gray-50/50">
       {/* NAVIGATION HEADER */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-blue-600-foreground font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
-              <Image src="/jcl-logo.png" alt="Logo" width={40} height={40} />
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-blue-50 text-blue-600 shadow-sm group-hover:scale-105 transition-transform">
+              {/* Replace with your actual Logo */}
+              <div className="font-bold text-xl">JC</div>
+              {/* <Image src="/jcl-logo.png" alt="Logo" width={40} height={40} /> */}
             </div>
-            <span className="font-bold text-xl tracking-tight text-foreground">
+            <span className="font-bold text-xl tracking-tight text-gray-900">
               JC&L Proserve Inc.
             </span>
           </Link>
           <Link
             href="/"
-            className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-blue-600 transition-colors"
+            className="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors"
           >
             <ChevronLeft size={16} />
             Back to Home
@@ -443,19 +716,29 @@ export default function CareerList() {
       </header>
 
       {/* --- JOB LISTING SECTION --- */}
-      <section className="relative pt-8 pb-12 overflow-hidden ">
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          {/* 🔎 Filters */}
-          <div className="flex flex-col md:flex-row gap-4 mb-8 px-5">
-            <Input
-              placeholder="Search job title or location..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="md:max-w-sm"
-            />
+      <section className="py-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-10 text-center">
+            <h1 className="text-3xl font-bold text-gray-900">
+              Current Openings
+            </h1>
+            <p className="text-gray-500 mt-2">
+              Find the role that fits you best.
+            </p>
+          </div>
 
+          {/* 🔎 Filters */}
+          <div className="flex flex-col md:flex-row gap-4 mb-8 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+            <div className="relative flex-1">
+              <Input
+                placeholder="Search job title or location..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="pl-4 border-gray-200"
+              />
+            </div>
             <Select value={typeFilter} onValueChange={setTypeFilter}>
-              <SelectTrigger className="md:w-48">
+              <SelectTrigger className="md:w-48 border-gray-200">
                 <SelectValue placeholder="Employment Type" />
               </SelectTrigger>
               <SelectContent>
@@ -469,93 +752,173 @@ export default function CareerList() {
 
           {/* Job Cards */}
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {filteredJobs.map((job) => (
-              <div
-                key={job.id}
-                className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all duration-300 flex flex-col justify-between group relative cursor-pointer overflow-hidden ring-1 ring-gray-900/5 transform hover:scale-105 hover:-translate-y-1 "
-              >
-                <span className="absolute top-2 left-2 z-0 h-1 w-1 rounded-full bg-blue-600 transition-all duration-300 group-hover:scale-[180] -translate-y-4 -translate-x-4"></span>
-                <span className="absolute hidden top-2 left-2 h-14 w-14 place-items-center rounded-full bg-blue-600 transition-all duration-300 group-hover:bg-blue-600">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-8 w-8 text-white transition-all"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z"
-                      clipRule="evenodd"
-                    />
-                    <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 0 1-3 0V6.75Z" />
-                  </svg>
-                </span>
-                {/* <h2 className="text-lg font-bold mb-1">{job.title}</h2>
-                <p className="text-sm text-muted-foreground mb-2">
-                  {job.location} · {job.type}
-                </p>
-                <p className="text-sm text-gray-600">
-                  {job.description.slice(0, 90)}...
-                </p>
+            {filteredJobs.length > 0 ? (
+              filteredJobs.map((job) => (
+                <div
+                  key={job.id}
+                  onClick={() => setSelectedJob(job)}
+                  className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative cursor-pointer overflow-hidden transform hover:-translate-y-1"
+                >
+                  {/* Decorative Background Hover Effect */}
+                  <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out z-0" />
 
-                <span className="inline-block mt-3 text-sm font-medium text-blue-600">
-                  View Details →
-                </span> */}
-                <div>
-                  <h2 className="text-xl font-bold text-gray-800 mb-1 group-hover:text-white relative font-sans group-hover:translate-x-4 transition-all duration-300 tracking-wide">
-                    {job.title}
-                  </h2>
-                  <p className="text-sm text-gray-500 mb-2 group-hover:text-white relative font-sans flex align-middle transition-all duration-300 tracking-wide">
-                    {job.location} · {job.type}
-                  </p>
-                  <p className="text-gray-700 text-sm mb-2 group-hover:text-white relative font-sans flex align-middle transition-all duration-300 tracking-wide">
-                    {job.description.slice(0, 100)}...
-                  </p>
-                  <button
-                    onClick={() => setSelectedJob(job)}
-                    className="text-blue-400 text-sm font-medium hover:underline group-hover:text-white relative font-sans flex align-middle transition-all duration-300 tracking-wide"
-                  >
-                    View More
-                  </button>
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="flex justify-between items-start mb-4">
+                      <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 group-hover:bg-white/20 group-hover:text-white group-hover:ring-white/30 transition-colors">
+                        {job.type}
+                      </span>
+                    </div>
+
+                    <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-white transition-colors">
+                      {job.title}
+                    </h2>
+
+                    <div className="flex items-center gap-4 text-sm text-gray-500 mb-4 group-hover:text-blue-50 transition-colors">
+                      <span className="flex items-center gap-1">
+                        <MapPin size={14} /> {job.location}
+                      </span>
+                    </div>
+
+                    <p className="text-gray-600 text-sm mb-6 line-clamp-3 grow group-hover:text-blue-50 transition-colors">
+                      {job.description}
+                    </p>
+
+                    <div className="flex items-center text-blue-600 text-sm font-semibold group-hover:text-white transition-colors">
+                      View Details
+                      <ChevronLeft className="rotate-180 ml-1 h-4 w-4" />
+                    </div>
+                  </div>
                 </div>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-20 text-gray-500">
+                No jobs found matching your criteria.
               </div>
-            ))}
+            )}
           </div>
 
-          {/* shadcn Dialog */}
+          {/* Detailed Job Modal */}
           <Dialog
             open={!!selectedJob}
-            onOpenChange={() => setSelectedJob(null)}
+            onOpenChange={(open) => !open && setSelectedJob(null)}
           >
-            <DialogContent className="max-w-lg">
+            <DialogContent className="max-w-2xl max-h-[85vh] overflow-hidden flex flex-col p-0 gap-0">
               {selectedJob && (
                 <>
-                  <DialogHeader>
-                    <DialogTitle>{selectedJob.title}</DialogTitle>
-                    <DialogDescription>
-                      {selectedJob.location} · {selectedJob.type}
-                    </DialogDescription>
-                  </DialogHeader>
+                  {/* Modal Header */}
+                  <div className="p-6 border-b border-gray-100">
+                    <DialogHeader>
+                      <div className="flex flex-col gap-2">
+                        <span className="w-fit inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
+                          {selectedJob.type}
+                        </span>
+                        <DialogTitle className="text-2xl font-bold text-gray-900">
+                          {selectedJob.title}
+                        </DialogTitle>
+                        <DialogDescription className="flex items-center gap-4 text-sm mt-1">
+                          <span className="flex items-center gap-1.5">
+                            <MapPin className="h-4 w-4 text-gray-400" />
+                            {selectedJob.location}
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <Clock className="h-4 w-4 text-gray-400" />
+                            posted recently
+                          </span>
+                        </DialogDescription>
+                      </div>
+                    </DialogHeader>
+                  </div>
 
-                  <p className="text-sm text-muted-foreground mt-4">
-                    {selectedJob.description}
-                  </p>
+                  {/* Scrollable Modal Body */}
+                  <div className="flex-1 overflow-y-auto p-6 space-y-8">
+                    {/* Description */}
+                    <section>
+                      <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+                        <Briefcase className="w-4 h-4 text-blue-600" />
+                        About the Role
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed text-sm">
+                        {selectedJob.description}
+                      </p>
+                    </section>
 
-                  <div className="flex flex-col gap-3 mt-6">
+                    {/* Responsibilities */}
+                    <section>
+                      <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+                        <ListChecks className="w-4 h-4 text-blue-600" />
+                        Key Responsibilities
+                      </h3>
+                      <ul className="space-y-2">
+                        {selectedJob.responsibilities.map((item, idx) => (
+                          <li
+                            key={idx}
+                            className="flex items-start gap-3 text-sm text-gray-600"
+                          >
+                            <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-400 shrink-0" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    {/* Qualifications */}
+                    <section>
+                      <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-blue-600" />
+                        Qualifications
+                      </h3>
+                      <ul className="space-y-2">
+                        {selectedJob.qualifications.map((item, idx) => (
+                          <li
+                            key={idx}
+                            className="flex items-start gap-3 text-sm text-gray-600"
+                          >
+                            <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    {/* Experience Requirements */}
+                    {selectedJob.experience &&
+                      selectedJob.experience.length > 0 && (
+                        <section>
+                          <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-blue-600" />
+                            Experience (Optional but Advantageous)
+                          </h3>
+                          <ul className="space-y-2">
+                            {selectedJob.experience.map((item, idx) => (
+                              <li
+                                key={idx}
+                                className="flex items-start gap-3 text-sm text-gray-600"
+                              >
+                                <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </section>
+                      )}
+                  </div>
+
+                  {/* Modal Footer / Apply Actions */}
+                  <div className="p-6 border-t border-gray-100 bg-gray-50 flex flex-col gap-3">
                     <a
                       href={`https://mail.google.com/mail/?view=cm&fs=1&to=hr.jclproserve@gmail.com&su=Application for ${encodeURIComponent(
                         selectedJob.title
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full text-center rounded-full bg-blue-600 text-white py-2 font-semibold hover:bg-blue-700 transition"
+                      className="w-full text-center rounded-lg bg-blue-600 text-white py-3 font-semibold hover:bg-blue-700 active:scale-[0.98] transition-all shadow-md shadow-blue-200"
                     >
-                      Apply via Gmail
+                      Apply Now via Gmail
                     </a>
 
-                    <p className="text-xs text-center text-muted-foreground">
-                      Or send your resume to{" "}
-                      <span className="font-medium">
+                    <p className="text-xs text-center text-gray-500">
+                      Or email your resume directly to{" "}
+                      <span className="font-semibold text-gray-700">
                         hr.jclproserve@gmail.com
                       </span>
                     </p>
