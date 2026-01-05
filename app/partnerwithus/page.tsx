@@ -445,7 +445,7 @@ export default function PartnerWithUsPage() {
               <div className="grid gap-4 py-4">
                 {/* Option A: Phone Call */}
                 <a
-                  href="tel:+1234567890"
+                  href="tel:+639931908150"
                   className="flex items-center gap-4 p-4 rounded-lg border border-slate-200 hover:border-teal-500 hover:bg-teal-50 transition-all cursor-pointer group"
                 >
                   <div className="bg-blue-100 p-2 rounded-full group-hover:bg-teal-600 group-hover:text-white transition-colors text-blue-700">
@@ -459,7 +459,7 @@ export default function PartnerWithUsPage() {
 
                 {/* Option B: Email */}
                 <a
-                  href="mailto:sales@agency.com"
+                  href="mailto:hr.jclproserve@gmail.com"
                   className="flex items-center gap-4 p-4 rounded-lg border border-slate-200 hover:border-teal-500 hover:bg-teal-50 transition-all cursor-pointer group"
                 >
                   <div className="bg-blue-100 p-2 rounded-full group-hover:bg-teal-600 group-hover:text-white transition-colors text-blue-700">
