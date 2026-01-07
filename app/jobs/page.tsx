@@ -608,15 +608,19 @@ type Job = {
   responsibilities: string[]; // The "Job Task"
   qualifications: string[]; // The "Qualification"
   experience?: string[]; // Optional "Experience" section
+  Skills?: string[]; // Optional "Skills" section
+  salary?: string; // Optional "Salary" section
 };
 
 // 2. Updated Data with rich details
 const jobList: Job[] = [
+  // Job 1
   {
     id: 1,
     title: "Housekeeping Utility/Messenger Staff",
     location: "City of San Fernando, Pampanga",
     type: "Full-Time",
+    salary: "Competitive Salary + Benefits",
     description:
       "Housekeeping Utility / Messenger staff are responsible for maintaining cleanliness, hygiene, and basic upkeep of the workplace, as well as performing errands and internal communications. They ensure a clean, safe, and organized environment while supporting smooth daily operations of the organization.",
     responsibilities: [
@@ -642,11 +646,13 @@ const jobList: Job[] = [
       "Familiarity with workplace safety and sanitation practices.",
     ],
   },
+  // Job 2
   {
     id: 2,
     title: "Human Resource Staff",
     location: "City of San Fernando, Pampanga",
     type: "Full-Time",
+    salary: "Php 14,000.00 – Php16,000.00 per month",
     description:
       "The HR Staff will oversee the full spectrum of HR functions: recruitment, performance, employee relations, policy, compliance, and culture. This is a key role in creating a structured, fair planning, recruiting, and managing manpower to ensure the organization has a competent and efficient workforce aligned with operational and strategic objectives.",
     responsibilities: [
@@ -668,6 +674,83 @@ const jobList: Job[] = [
       "Relevant work experience (internship for entry-level; 2–5+ years for mid/senior roles)",
       "Proficiency in HRIS systems and Microsoft Office tools",
       "Ability to lead with empathy, integrity, and strategic insight",
+    ],
+  },
+  // Job 3
+  {
+    id: 3,
+    title: "Payroll Staff",
+    location: "City of San Fernando, Pampanga",
+    type: "Full-Time",
+    salary: "Php 14,000.00 – Php16,000.00 per month",
+    description:
+      "Payroll staff are responsible for managing employee salaries, wages, bonuses, deductions, and benefits accurately and on time. They ensure compliance with labor laws and maintain proper payroll records.",
+    responsibilities: [
+      "Prepare and process employee salaries and wages on schedule",
+      "Maintain accurate payroll records and update employee information",
+      "Calculate overtime, bonuses, and deductions (taxes, benefits, etc.)",
+      "Ensure compliance with labor laws and company policies",
+      "Respond to employee payroll inquiries and resolve discrepancies",
+      "Assist in audits related to payroll and taxation",
+      "Coordinate with HR and finance departments",
+    ],
+    Skills: [
+      "Attention to detail and accuracy",
+      "Knowledge of payroll software (e.g., SAP, QuickBooks, ADP)",
+      "Understanding of labor laws and tax regulations",
+      "Good communication and organizational skills",
+      "Basic accounting and mathematical skills"
+    ],
+    qualifications: [
+      "Male or Female",
+      "Graduate of Accounting, Finance, Business Administration, Human Resource Management, or a related course",
+      "With knowledge of payroll computation and basic labor laws",
+      "Skilled in Microsoft Excel and payroll systems",
+      "Detail-oriented and accurate in handling numbers",
+      "Honest and able to handle confidential information",
+      "Can work under pressure and meet deadlines",
+      "Experience in a manpower or staffing company is an advantage",
+    ],
+  },
+  // Job 4
+  {
+    id: 4,
+    title: "Site Coordinator",
+    location: "City of San Fernando, Pampanga",
+    type: "Full-Time",
+    salary: "Competitive Salary + Benefits",
+    description:
+      "The Site Coordinator is responsible for coordinating and supervising daily site operations to meet the standard operations on site. This role involves scheduling staff, assigning work, tracking tasks, handling service requests, maintaining records, and acting as a communication link between employee/s, supervisors, and management to ensure efficient and smooth operations. ",
+    responsibilities: [
+      "Coordinate daily manpower deployment according to site and client requirements",
+      "Ensure sufficient staffing levels to meet operational needs at all times",
+      "Prepare duty rosters, shift schedules, and manpower allocation plans",
+      "Monitor staff attendance, absenteeism, leave, and overtime",
+      "Arrange replacements for absent staff and handle emergency manpower requirements",
+      "Act as the primary point of contact for site workers, supervisors, and client’s management",
+      "Ensure manpower is deployed in compliance with contract terms and site policies",
+      "Coordinate with HR for recruitment, deployment, transfers, and documentations",
+      "Maintain accurate manpower records, timesheets, attendance logs/accrual, and reports",
+      "Monitor workforce productivity and report performance issues to management",
+      "Ensure staff compliance with safety regulations, site rules, and company policies",
+      "Support supervisors in handling workforce-related concerns and disciplinary issues",
+      "Communicate daily manpower status, shortages, and operational challenges",
+      "Assist during audits, inspections, or client reviews related to manpower"
+    ],
+    Skills: [
+      "Strong coordination and organizational skills",
+      "Effective communication and interpersonal abilities",
+      "Ability to manage large workforces and multitask in a fast-paced environment",
+      "Problem-solving and decision-making skills",
+      "Attention to detail and accuracy in record-keeping",
+      "Basic computer skills (MS Office, attendance systems, or manpower software)",
+      "Ability to work independently and as part of a team, and",
+      "Knowledge of labor regulations and site safety practices.",
+    ],
+    qualifications: [
+      "High school diploma or equivalent (minimum requirement)",
+      "Diploma or degree in management or a related field (preferred)",
+      "Previous experience in manpower coordination, site operations, or supervision",
     ],
   },
 ];
@@ -825,6 +908,11 @@ export default function CareerList() {
                             posted recently
                           </span>
                         </DialogDescription>
+                        <div className="mt-4">
+                          <span className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
+                            Salary: {selectedJob.salary}
+                          </span>
+                        </div>
                       </div>
                     </DialogHeader>
                   </div>
@@ -879,6 +967,27 @@ export default function CareerList() {
                         ))}
                       </ul>
                     </section>
+
+                    {/* Skills */}
+                    {selectedJob.Skills && selectedJob.Skills.length > 0 && (
+                      <section>
+                        <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-blue-600" />
+                          Required Skills
+                        </h3>
+                        <ul className="space-y-2">
+                          {selectedJob.Skills.map((item, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start gap-3 text-sm text-gray-600"
+                            >
+                              <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </section>
+                    )}
 
                     {/* Experience Requirements */}
                     {selectedJob.experience &&
