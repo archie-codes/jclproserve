@@ -667,13 +667,10 @@ const jobList: Job[] = [
     ],
     qualifications: [
       "Bachelor’s degree in HR, Business Administration, or related field (Open for Fresh Graduates)",
-      "Master’s degree or HR specialization (for senior roles, optional)",
-      "Professional HR certifications (e.g., SHRM, PHR, CIPD)",
-      "Knowledge of labor laws and HR policies",
+      "Must have basic knowledge in Administrative work",
       "Strong communication, interpersonal, and problem-solving skills",
-      "Relevant work experience (internship for entry-level; 2–5+ years for mid/senior roles)",
-      "Proficiency in HRIS systems and Microsoft Office tools",
-      "Ability to lead with empathy, integrity, and strategic insight",
+      "Proficiency in Microsoft Office tools (HRIS systems knowledge is advantage); and",
+      "Ability to lead with empathy, integrity, and strategic insight.",
     ],
   },
   // Job 3
