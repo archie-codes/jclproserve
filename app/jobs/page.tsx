@@ -597,6 +597,7 @@ import {
   ListChecks,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 // 1. Updated Type Definition to include specific arrays
 type Job = {
@@ -778,8 +779,8 @@ export default function CareerList() {
           <Link href="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-blue-50 text-blue-600 shadow-sm group-hover:scale-105 transition-transform">
               {/* Replace with your actual Logo */}
-              <div className="font-bold text-xl">JC</div>
-              {/* <Image src="/jcl-logo.png" alt="Logo" width={40} height={40} /> */}
+              {/* <div className="font-bold text-xl">JC</div> */}
+              <Image src="/jcl-logo.png" alt="Logo" width={40} height={40} />
             </div>
             <span className="font-bold text-xl tracking-tight text-gray-900">
               JC&L Proserve Inc.
