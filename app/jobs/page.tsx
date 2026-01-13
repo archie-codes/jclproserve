@@ -1107,8 +1107,8 @@ const jobList: Job[] = [
       "Safety & Compliance – Report hazards, maintain equipment, and follow workplace safety protocols.",
     ],
     qualifications: [
-      "At least High School Graduate/Vocational/College Under Graduate or Graduate.",
-      "With NCII in Housekeeping is an Advantage.",
+      "At least High School Graduate",
+      "With NCII in Housekeeping is an Advantage. (But not required)",
       "Physical fitness and stamina for cleaning, lifting, and walking.",
       "Basic knowledge of cleaning tools, equipment, and hygiene standards.",
       "Time management and reliability.",
