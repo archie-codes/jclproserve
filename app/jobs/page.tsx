@@ -570,6 +570,477 @@
 //   );
 // }
 
+// "use client";
+
+// import { useMemo, useState } from "react";
+// import {
+//   Dialog,
+//   DialogContent,
+//   DialogHeader,
+//   DialogTitle,
+//   DialogDescription,
+// } from "@/components/ui/dialog";
+// import { Input } from "@/components/ui/input";
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from "@/components/ui/select";
+// import {
+//   ChevronLeft,
+//   MapPin,
+//   Clock,
+//   Briefcase,
+//   CheckCircle2,
+//   ListChecks,
+// } from "lucide-react";
+// import Link from "next/link";
+// import Image from "next/image";
+
+// // 1. Updated Type Definition to include specific arrays
+// type Job = {
+//   id: number;
+//   title: string;
+//   location: string;
+//   type: string;
+//   description: string;
+//   responsibilities: string[]; // The "Job Task"
+//   qualifications: string[]; // The "Qualification"
+//   experience?: string[]; // Optional "Experience" section
+//   Skills?: string[]; // Optional "Skills" section
+//   salary?: string; // Optional "Salary" section
+// };
+
+// // 2. Updated Data with rich details
+// const jobList: Job[] = [
+//   // Job 1
+//   {
+//     id: 1,
+//     title: "Housekeeping Utility/Messenger Staff",
+//     location: "City of San Fernando, Pampanga",
+//     type: "Full-Time",
+//     salary: "Competitive Salary + Benefits",
+//     description:
+//       "Housekeeping Utility / Messenger staff are responsible for maintaining cleanliness, hygiene, and basic upkeep of the workplace, as well as performing errands and internal communications. They ensure a clean, safe, and organized environment while supporting smooth daily operations of the organization.",
+//     responsibilities: [
+//       "Cleaning & Maintenance – Sweep, mop, dust, and maintain cleanliness in offices, corridors, and common areas.",
+//       "Sanitation & Hygiene – Ensure washrooms, pantries, and other facilities are clean and hygienic.",
+//       "Waste Management – Collect and dispose of waste in designated areas.",
+//       "Support Services – Assist staff with office tasks, moving files, and carrying materials.",
+//       "Inventory Assistance – Help monitor and replenish cleaning and office supplies.",
+//       "Safety & Compliance – Report hazards, maintain equipment, and follow workplace safety protocols.",
+//     ],
+//     qualifications: [
+//       "At least High School Graduate/Vocational/College Under Graduate or Graduate.",
+//       "With NCII in Housekeeping is an Advantage.",
+//       "Physical fitness and stamina for cleaning, lifting, and walking.",
+//       "Basic knowledge of cleaning tools, equipment, and hygiene standards.",
+//       "Time management and reliability.",
+//       "Good communication skills for messenger duties.",
+//       "Ability to follow instructions and work independently.",
+//       "Must be willing to relocate.",
+//     ],
+//     experience: [
+//       "Prior experience in housekeeping, janitorial work, or messenger services.",
+//       "Familiarity with workplace safety and sanitation practices.",
+//     ],
+//   },
+//   // Job 2
+//   {
+//     id: 2,
+//     title: "Human Resource Staff",
+//     location: "City of San Fernando, Pampanga",
+//     type: "Full-Time",
+//     salary: "Php 14,000.00 – Php16,000.00 per month",
+//     description:
+//       "The HR Staff will oversee the full spectrum of HR functions: recruitment, performance, employee relations, policy, compliance, and culture. This is a key role in creating a structured, fair planning, recruiting, and managing manpower to ensure the organization has a competent and efficient workforce aligned with operational and strategic objectives.",
+//     responsibilities: [
+//       "Manpower Planning - Forecasting workforce needs to ensure the right number of employees with the required skills are available skills are available.",
+//       "Recruitment and Selection - Attracting, screening, and hiring suitable candidates to fill organizational positions.",
+//       "Deployment and Placement - Assigning employees to roles that match their skills and organizational requirements.",
+//       "Training and Development - Enhancing employee skills and knowledge to improve performance and productivity.",
+//       "Performance Management - Monitoring, evaluating, and improving employee performance.",
+//       "Employee Relations - Maintaining positive relationships between employees and management.",
+//       "Compensation and Benefits Management - Administering salaries, benefits, and incentives fairly and competitively.",
+//       "Compliance and Record Management - Ensuring adherence to labor laws and maintaining accurate manpower records.",
+//     ],
+//     qualifications: [
+//       "Bachelor’s degree in HR, Business Administration, or related field (Open for Fresh Graduates)",
+//       "Must have basic knowledge in Administrative work",
+//       "Strong communication, interpersonal, and problem-solving skills",
+//       "Proficiency in Microsoft Office tools (HRIS systems knowledge is advantage); and",
+//       "Ability to lead with empathy, integrity, and strategic insight.",
+//     ],
+//   },
+//   // Job 3
+//   {
+//     id: 3,
+//     title: "Payroll Staff",
+//     location: "City of San Fernando, Pampanga",
+//     type: "Full-Time",
+//     salary: "Php 14,000.00 – Php16,000.00 per month",
+//     description:
+//       "Payroll staff are responsible for managing employee salaries, wages, bonuses, deductions, and benefits accurately and on time. They ensure compliance with labor laws and maintain proper payroll records.",
+//     responsibilities: [
+//       "Prepare and process employee salaries and wages on schedule",
+//       "Maintain accurate payroll records and update employee information",
+//       "Calculate overtime, bonuses, and deductions (taxes, benefits, etc.)",
+//       "Ensure compliance with labor laws and company policies",
+//       "Respond to employee payroll inquiries and resolve discrepancies",
+//       "Assist in audits related to payroll and taxation",
+//       "Coordinate with HR and finance departments",
+//     ],
+//     Skills: [
+//       "Attention to detail and accuracy",
+//       "Knowledge of payroll software (e.g., SAP, QuickBooks, ADP)",
+//       "Understanding of labor laws and tax regulations",
+//       "Good communication and organizational skills",
+//       "Basic accounting and mathematical skills"
+//     ],
+//     qualifications: [
+//       "Male or Female",
+//       "Graduate of Accounting, Finance, Business Administration, Human Resource Management, or a related course",
+//       "With knowledge of payroll computation and basic labor laws",
+//       "Skilled in Microsoft Excel and payroll systems",
+//       "Detail-oriented and accurate in handling numbers",
+//       "Honest and able to handle confidential information",
+//       "Can work under pressure and meet deadlines",
+//       "Experience in a manpower or staffing company is an advantage",
+//     ],
+//   },
+//   // Job 4
+//   {
+//     id: 4,
+//     title: "Site Coordinator",
+//     location: "City of San Fernando, Pampanga",
+//     type: "Full-Time",
+//     salary: "Competitive Salary + Benefits",
+//     description:
+//       "The Site Coordinator is responsible for coordinating and supervising daily site operations to meet the standard operations on site. This role involves scheduling staff, assigning work, tracking tasks, handling service requests, maintaining records, and acting as a communication link between employee/s, supervisors, and management to ensure efficient and smooth operations. ",
+//     responsibilities: [
+//       "Coordinate daily manpower deployment according to site and client requirements",
+//       "Ensure sufficient staffing levels to meet operational needs at all times",
+//       "Prepare duty rosters, shift schedules, and manpower allocation plans",
+//       "Monitor staff attendance, absenteeism, leave, and overtime",
+//       "Arrange replacements for absent staff and handle emergency manpower requirements",
+//       "Act as the primary point of contact for site workers, supervisors, and client’s management",
+//       "Ensure manpower is deployed in compliance with contract terms and site policies",
+//       "Coordinate with HR for recruitment, deployment, transfers, and documentations",
+//       "Maintain accurate manpower records, timesheets, attendance logs/accrual, and reports",
+//       "Monitor workforce productivity and report performance issues to management",
+//       "Ensure staff compliance with safety regulations, site rules, and company policies",
+//       "Support supervisors in handling workforce-related concerns and disciplinary issues",
+//       "Communicate daily manpower status, shortages, and operational challenges",
+//       "Assist during audits, inspections, or client reviews related to manpower"
+//     ],
+//     Skills: [
+//       "Strong coordination and organizational skills",
+//       "Effective communication and interpersonal abilities",
+//       "Ability to manage large workforces and multitask in a fast-paced environment",
+//       "Problem-solving and decision-making skills",
+//       "Attention to detail and accuracy in record-keeping",
+//       "Basic computer skills (MS Office, attendance systems, or manpower software)",
+//       "Ability to work independently and as part of a team, and",
+//       "Knowledge of labor regulations and site safety practices.",
+//     ],
+//     qualifications: [
+//       "High school diploma or equivalent (minimum requirement)",
+//       "Diploma or degree in management or a related field (preferred)",
+//       "Previous experience in manpower coordination, site operations, or supervision",
+//     ],
+//   },
+// ];
+
+// export default function CareerList() {
+//   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+//   const [search, setSearch] = useState("");
+//   const [typeFilter, setTypeFilter] = useState<string>("all");
+
+//   /* 🔍 Filter Logic */
+//   const filteredJobs = useMemo(() => {
+//     return jobList.filter((job) => {
+//       const matchesSearch =
+//         job.title.toLowerCase().includes(search.toLowerCase()) ||
+//         job.location.toLowerCase().includes(search.toLowerCase());
+
+//       const matchesType = typeFilter === "all" || job.type === typeFilter;
+
+//       return matchesSearch && matchesType;
+//     });
+//   }, [search, typeFilter]);
+
+//   return (
+//     <main className="flex flex-col min-h-screen bg-gray-50/50">
+//       {/* NAVIGATION HEADER */}
+//       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+//         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+//           <Link href="/" className="flex items-center gap-3 group">
+//             <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-blue-50 text-blue-600 shadow-sm group-hover:scale-105 transition-transform">
+//               {/* Replace with your actual Logo */}
+//               {/* <div className="font-bold text-xl">JC</div> */}
+//               <Image src="/jcl-logo.png" alt="Logo" width={40} height={40} />
+//             </div>
+//             <span className="font-bold text-xl tracking-tight text-gray-900">
+//               JC&L Proserve Inc.
+//             </span>
+//           </Link>
+//           <Link
+//             href="/"
+//             className="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors"
+//           >
+//             <ChevronLeft size={16} />
+//             Back to Home
+//           </Link>
+//         </div>
+//       </header>
+
+//       {/* --- JOB LISTING SECTION --- */}
+//       <section className="py-12">
+//         <div className="max-w-7xl mx-auto px-6">
+//           <div className="mb-10 text-center">
+//             <h1 className="text-3xl font-bold text-gray-900">
+//               Current Openings
+//             </h1>
+//             <p className="text-gray-500 mt-2">
+//               Find the role that fits you best.
+//             </p>
+//           </div>
+
+//           {/* 🔎 Filters */}
+//           <div className="flex flex-col md:flex-row gap-4 mb-8 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+//             <div className="relative flex-1">
+//               <Input
+//                 placeholder="Search job title or location..."
+//                 value={search}
+//                 onChange={(e) => setSearch(e.target.value)}
+//                 className="pl-4 border-gray-200"
+//               />
+//             </div>
+//             <Select value={typeFilter} onValueChange={setTypeFilter}>
+//               <SelectTrigger className="md:w-48 border-gray-200">
+//                 <SelectValue placeholder="Employment Type" />
+//               </SelectTrigger>
+//               <SelectContent>
+//                 <SelectItem value="all">All Types</SelectItem>
+//                 <SelectItem value="Full-Time">Full-Time</SelectItem>
+//                 <SelectItem value="Part-Time">Part-Time</SelectItem>
+//                 <SelectItem value="Contract">Contract</SelectItem>
+//               </SelectContent>
+//             </Select>
+//           </div>
+
+//           {/* Job Cards */}
+//           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+//             {filteredJobs.length > 0 ? (
+//               filteredJobs.map((job) => (
+//                 <div
+//                   key={job.id}
+//                   onClick={() => setSelectedJob(job)}
+//                   className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative cursor-pointer overflow-hidden transform hover:-translate-y-1"
+//                 >
+//                   {/* Decorative Background Hover Effect */}
+//                   <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out z-0" />
+
+//                   <div className="relative z-10 flex flex-col h-full">
+//                     <div className="flex justify-between items-start mb-4">
+//                       <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 group-hover:bg-white/20 group-hover:text-white group-hover:ring-white/30 transition-colors">
+//                         {job.type}
+//                       </span>
+//                     </div>
+
+//                     <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-white transition-colors">
+//                       {job.title}
+//                     </h2>
+
+//                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-4 group-hover:text-blue-50 transition-colors">
+//                       <span className="flex items-center gap-1">
+//                         <MapPin size={14} /> {job.location}
+//                       </span>
+//                     </div>
+
+//                     <p className="text-gray-600 text-sm mb-6 line-clamp-3 grow group-hover:text-blue-50 transition-colors">
+//                       {job.description}
+//                     </p>
+
+//                     <div className="flex items-center text-blue-600 text-sm font-semibold group-hover:text-white transition-colors">
+//                       View Details
+//                       <ChevronLeft className="rotate-180 ml-1 h-4 w-4" />
+//                     </div>
+//                   </div>
+//                 </div>
+//               ))
+//             ) : (
+//               <div className="col-span-full text-center py-20 text-gray-500">
+//                 No jobs found matching your criteria.
+//               </div>
+//             )}
+//           </div>
+
+//           {/* Detailed Job Modal */}
+//           <Dialog
+//             open={!!selectedJob}
+//             onOpenChange={(open) => !open && setSelectedJob(null)}
+//           >
+//             <DialogContent className="max-w-2xl max-h-[85vh] overflow-hidden flex flex-col p-0 gap-0">
+//               {selectedJob && (
+//                 <>
+//                   {/* Modal Header */}
+//                   <div className="p-6 border-b border-gray-100">
+//                     <DialogHeader>
+//                       <div className="flex flex-col gap-2">
+//                         <span className="w-fit inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
+//                           {selectedJob.type}
+//                         </span>
+//                         <DialogTitle className="text-2xl font-bold text-gray-900">
+//                           {selectedJob.title}
+//                         </DialogTitle>
+//                         <DialogDescription className="flex items-center gap-4 text-sm mt-1">
+//                           <span className="flex items-center gap-1.5">
+//                             <MapPin className="h-4 w-4 text-gray-400" />
+//                             {selectedJob.location}
+//                           </span>
+//                           <span className="flex items-center gap-1.5">
+//                             <Clock className="h-4 w-4 text-gray-400" />
+//                             posted recently
+//                           </span>
+//                         </DialogDescription>
+//                         <div className="mt-4">
+//                           <span className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
+//                             Salary: {selectedJob.salary}
+//                           </span>
+//                         </div>
+//                       </div>
+//                     </DialogHeader>
+//                   </div>
+
+//                   {/* Scrollable Modal Body */}
+//                   <div className="flex-1 overflow-y-auto p-6 space-y-8">
+//                     {/* Description */}
+//                     <section>
+//                       <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+//                         <Briefcase className="w-4 h-4 text-blue-600" />
+//                         About the Role
+//                       </h3>
+//                       <p className="text-gray-600 leading-relaxed text-sm">
+//                         {selectedJob.description}
+//                       </p>
+//                     </section>
+
+//                     {/* Responsibilities */}
+//                     <section>
+//                       <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+//                         <ListChecks className="w-4 h-4 text-blue-600" />
+//                         Key Responsibilities
+//                       </h3>
+//                       <ul className="space-y-2">
+//                         {selectedJob.responsibilities.map((item, idx) => (
+//                           <li
+//                             key={idx}
+//                             className="flex items-start gap-3 text-sm text-gray-600"
+//                           >
+//                             <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-400 shrink-0" />
+//                             <span>{item}</span>
+//                           </li>
+//                         ))}
+//                       </ul>
+//                     </section>
+
+//                     {/* Qualifications */}
+//                     <section>
+//                       <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+//                         <CheckCircle2 className="w-4 h-4 text-blue-600" />
+//                         Qualifications
+//                       </h3>
+//                       <ul className="space-y-2">
+//                         {selectedJob.qualifications.map((item, idx) => (
+//                           <li
+//                             key={idx}
+//                             className="flex items-start gap-3 text-sm text-gray-600"
+//                           >
+//                             <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+//                             <span>{item}</span>
+//                           </li>
+//                         ))}
+//                       </ul>
+//                     </section>
+
+//                     {/* Skills */}
+//                     {selectedJob.Skills && selectedJob.Skills.length > 0 && (
+//                       <section>
+//                         <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+//                           <CheckCircle2 className="w-4 h-4 text-blue-600" />
+//                           Required Skills
+//                         </h3>
+//                         <ul className="space-y-2">
+//                           {selectedJob.Skills.map((item, idx) => (
+//                             <li
+//                               key={idx}
+//                               className="flex items-start gap-3 text-sm text-gray-600"
+//                             >
+//                               <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+//                               <span>{item}</span>
+//                             </li>
+//                           ))}
+//                         </ul>
+//                       </section>
+//                     )}
+
+//                     {/* Experience Requirements */}
+//                     {selectedJob.experience &&
+//                       selectedJob.experience.length > 0 && (
+//                         <section>
+//                           <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+//                             <CheckCircle2 className="w-4 h-4 text-blue-600" />
+//                             Experience (Optional but Advantageous)
+//                           </h3>
+//                           <ul className="space-y-2">
+//                             {selectedJob.experience.map((item, idx) => (
+//                               <li
+//                                 key={idx}
+//                                 className="flex items-start gap-3 text-sm text-gray-600"
+//                               >
+//                                 <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+//                                 <span>{item}</span>
+//                               </li>
+//                             ))}
+//                           </ul>
+//                         </section>
+//                       )}
+//                   </div>
+
+//                   {/* Modal Footer / Apply Actions */}
+//                   <div className="p-6 border-t border-gray-100 bg-gray-50 flex flex-col gap-3">
+//                     <a
+//                       href={`https://mail.google.com/mail/?view=cm&fs=1&to=hr.jclproserve@gmail.com&su=Application for ${encodeURIComponent(
+//                         selectedJob.title
+//                       )}`}
+//                       target="_blank"
+//                       rel="noopener noreferrer"
+//                       className="w-full text-center rounded-lg bg-blue-600 text-white py-3 font-semibold hover:bg-blue-700 active:scale-[0.98] transition-all shadow-md shadow-blue-200"
+//                     >
+//                       Apply Now via Gmail
+//                     </a>
+
+//                     <p className="text-xs text-center text-gray-500">
+//                       Or email your resume directly to{" "}
+//                       <span className="font-semibold text-gray-700">
+//                         hr.jclproserve@gmail.com
+//                       </span>
+//                     </p>
+//                   </div>
+//                 </>
+//               )}
+//             </DialogContent>
+//           </Dialog>
+//         </div>
+//       </section>
+//     </main>
+//   );
+// }
+
+
 "use client";
 
 import { useMemo, useState } from "react";
@@ -595,32 +1066,35 @@ import {
   Briefcase,
   CheckCircle2,
   ListChecks,
+  Flame, // Added Flame icon for the urgent badge
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
-// 1. Updated Type Definition to include specific arrays
+// 1. Updated Type Definition
 type Job = {
   id: number;
   title: string;
   location: string;
   type: string;
   description: string;
-  responsibilities: string[]; // The "Job Task"
-  qualifications: string[]; // The "Qualification"
-  experience?: string[]; // Optional "Experience" section
-  Skills?: string[]; // Optional "Skills" section
-  salary?: string; // Optional "Salary" section
+  responsibilities: string[];
+  qualifications: string[];
+  experience?: string[];
+  Skills?: string[];
+  salary?: string;
+  urgent?: boolean; // Added this optional flag
 };
 
-// 2. Updated Data with rich details
+// 2. Updated Data
 const jobList: Job[] = [
-  // Job 1
+  // Job 1 - MARKED AS URGENT
   {
     id: 1,
     title: "Housekeeping Utility/Messenger Staff",
     location: "City of San Fernando, Pampanga",
     type: "Full-Time",
+    urgent: true, // <--- Triggers the glowing animation
     salary: "Competitive Salary + Benefits",
     description:
       "Housekeeping Utility / Messenger staff are responsible for maintaining cleanliness, hygiene, and basic upkeep of the workplace, as well as performing errands and internal communications. They ensure a clean, safe, and organized environment while supporting smooth daily operations of the organization.",
@@ -697,7 +1171,7 @@ const jobList: Job[] = [
       "Knowledge of payroll software (e.g., SAP, QuickBooks, ADP)",
       "Understanding of labor laws and tax regulations",
       "Good communication and organizational skills",
-      "Basic accounting and mathematical skills"
+      "Basic accounting and mathematical skills",
     ],
     qualifications: [
       "Male or Female",
@@ -733,7 +1207,7 @@ const jobList: Job[] = [
       "Ensure staff compliance with safety regulations, site rules, and company policies",
       "Support supervisors in handling workforce-related concerns and disciplinary issues",
       "Communicate daily manpower status, shortages, and operational challenges",
-      "Assist during audits, inspections, or client reviews related to manpower"
+      "Assist during audits, inspections, or client reviews related to manpower",
     ],
     Skills: [
       "Strong coordination and organizational skills",
@@ -758,7 +1232,6 @@ export default function CareerList() {
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState<string>("all");
 
-  /* 🔍 Filter Logic */
   const filteredJobs = useMemo(() => {
     return jobList.filter((job) => {
       const matchesSearch =
@@ -778,8 +1251,6 @@ export default function CareerList() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-blue-50 text-blue-600 shadow-sm group-hover:scale-105 transition-transform">
-              {/* Replace with your actual Logo */}
-              {/* <div className="font-bold text-xl">JC</div> */}
               <Image src="/jcl-logo.png" alt="Logo" width={40} height={40} />
             </div>
             <span className="font-bold text-xl tracking-tight text-gray-900">
@@ -838,14 +1309,42 @@ export default function CareerList() {
                 <div
                   key={job.id}
                   onClick={() => setSelectedJob(job)}
-                  className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative cursor-pointer overflow-hidden transform hover:-translate-y-1"
+                  className={`
+                    relative cursor-pointer overflow-hidden rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between group transform hover:-translate-y-1
+                    ${
+                      // CONDITIONAL STYLING FOR URGENT JOBS
+                      job.urgent
+                        ? "bg-white border-2 border-orange-500 shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.5)]"
+                        : "bg-white border border-gray-100 shadow-sm hover:shadow-xl"
+                    }
+                  `}
                 >
+                  {/* URGENT BADGE */}
+                  {job.urgent && (
+                    <div className="absolute top-0 right-0 z-20">
+                      <div className="bg-orange-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-widest flex items-center gap-1 shadow-sm animate-pulse">
+                        <Flame size={12} className="fill-white" />
+                        Massive Hiring
+                      </div>
+                    </div>
+                  )}
+
                   {/* Decorative Background Hover Effect */}
-                  <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out z-0" />
+                  <div
+                    className={`absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out z-0 
+                    ${job.urgent ? "bg-orange-500" : "bg-blue-600"}`}
+                  />
 
                   <div className="relative z-10 flex flex-col h-full">
                     <div className="flex justify-between items-start mb-4">
-                      <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 group-hover:bg-white/20 group-hover:text-white group-hover:ring-white/30 transition-colors">
+                      <span
+                        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset transition-colors
+                        ${
+                          job.urgent
+                            ? "bg-orange-50 text-orange-700 ring-orange-700/10 group-hover:bg-white/20 group-hover:text-white group-hover:ring-white/30"
+                            : "bg-blue-50 text-blue-700 ring-blue-700/10 group-hover:bg-white/20 group-hover:text-white group-hover:ring-white/30"
+                        }`}
+                      >
                         {job.type}
                       </span>
                     </div>
@@ -854,17 +1353,24 @@ export default function CareerList() {
                       {job.title}
                     </h2>
 
-                    <div className="flex items-center gap-4 text-sm text-gray-500 mb-4 group-hover:text-blue-50 transition-colors">
+                    <div className="flex items-center gap-4 text-sm text-gray-500 mb-4 group-hover:text-white/90 transition-colors">
                       <span className="flex items-center gap-1">
                         <MapPin size={14} /> {job.location}
                       </span>
                     </div>
 
-                    <p className="text-gray-600 text-sm mb-6 line-clamp-3 grow group-hover:text-blue-50 transition-colors">
+                    <p className="text-gray-600 text-sm mb-6 line-clamp-3 grow group-hover:text-white/90 transition-colors">
                       {job.description}
                     </p>
 
-                    <div className="flex items-center text-blue-600 text-sm font-semibold group-hover:text-white transition-colors">
+                    <div
+                      className={`flex items-center text-sm font-semibold transition-colors
+                      ${
+                        job.urgent
+                          ? "text-orange-600 group-hover:text-white"
+                          : "text-blue-600 group-hover:text-white"
+                      }`}
+                    >
                       View Details
                       <ChevronLeft className="rotate-180 ml-1 h-4 w-4" />
                     </div>
@@ -890,6 +1396,13 @@ export default function CareerList() {
                   <div className="p-6 border-b border-gray-100">
                     <DialogHeader>
                       <div className="flex flex-col gap-2">
+                        {/* URGENT BANNER IN MODAL */}
+                        {selectedJob.urgent && (
+                          <div className="w-full bg-orange-100 text-orange-800 text-xs font-bold px-3 py-2 rounded-md border border-orange-200 mb-2 flex items-center gap-2">
+                            <Flame size={14} className="fill-orange-800" />
+                            URGENTLY HIRING FOR THIS POSITION
+                          </div>
+                        )}
                         <span className="w-fit inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
                           {selectedJob.type}
                         </span>
@@ -1018,7 +1531,12 @@ export default function CareerList() {
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full text-center rounded-lg bg-blue-600 text-white py-3 font-semibold hover:bg-blue-700 active:scale-[0.98] transition-all shadow-md shadow-blue-200"
+                      className={`w-full text-center rounded-lg text-white py-3 font-semibold hover:opacity-90 active:scale-[0.98] transition-all shadow-md
+                      ${
+                        selectedJob.urgent
+                          ? "bg-orange-600 shadow-orange-200"
+                          : "bg-blue-600 shadow-blue-200"
+                      }`}
                     >
                       Apply Now via Gmail
                     </a>
