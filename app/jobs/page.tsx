@@ -1093,7 +1093,7 @@ const jobList: Job[] = [
     id: 1,
     title: "Housekeeping Utility/Messenger Staff",
     location: "City of San Fernando, Pampanga",
-    type: "Full-Time",
+    type: "Contractual",
     urgent: true, // <--- Triggers the glowing animation
     salary: "Competitive Salary + Benefits",
     description:
