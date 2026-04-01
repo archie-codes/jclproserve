@@ -36,7 +36,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <Toaster position="top-center" />
+        <Toaster position="top-right" />
         {/* FOOTER - Clean, authoritative layout */}
         <footer className="bg-slate-50 border-t py-20">
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
@@ -94,13 +94,17 @@ export default function RootLayout({
                   <Link
                     href="/aboutus"
                     className="hover:text-primary transition-colors"
-                  >About Us</Link>
+                  >
+                    About Us
+                  </Link>
                 </li>
                 <li>
                   <Link
                     href="/services"
                     className="hover:text-primary transition-colors"
-                  >Services</Link>
+                  >
+                    Services
+                  </Link>
                 </li>
               </ul>
             </div>
