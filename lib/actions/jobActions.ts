@@ -103,3 +103,15 @@ export async function updateJob(id: number, data: CreateJobInput) {
     return { success: false };
   }
 }
+
+// 6. Get job by ID
+export async function getJobById(id: number) {
+  try {
+    const allJobs = await getJobs();
+    const job = allJobs.find((j: any) => j.id === Number(id));
+    return job || null;
+  } catch (error) {
+    console.error("Failed to fetch job by ID:", error);
+    return null;
+  }
+}
