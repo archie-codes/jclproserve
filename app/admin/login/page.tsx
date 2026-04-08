@@ -5,30 +5,42 @@ import { useRouter } from "next/navigation";
 import { loginAuth } from "@/lib/actions/authActions";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader2, Lock, ShieldCheck } from "lucide-react";
+import {
+  Loader2,
+  Lock,
+  ShieldCheck,
+  AlertCircle,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
   async function handleSubmit(formData: FormData) {
     setIsLoading(true);
+    setErrorMessage(null); // Clear any previous errors
 
     try {
       const result = await loginAuth(formData);
 
       if (result?.error) {
-        toast.error(result.error);
+        // Display the error directly inside the form instead of a toast
+        setErrorMessage(result.error);
         setIsLoading(false);
       } else {
-        toast.success("Authentication successful");
-        router.push("/admin"); // Redirects to your new dashboard
-        router.refresh(); // Forces Next.js to update the router cache
+        // Keep the toast for success, it feels rewarding!
+        // toast.success("Authentication successful");
+        router.push("/admin");
+        router.refresh();
       }
     } catch (error) {
-      toast.error("An unexpected error occurred.");
+      setErrorMessage("An unexpected error occurred. Please try again.");
       setIsLoading(false);
     }
   }
@@ -42,7 +54,7 @@ export default function LoginPage() {
       <div className="max-w-md w-full bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 relative z-10">
         {/* Header / Logo */}
         <div className="flex flex-col items-center mb-10 text-center">
-          <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center shadow-inner mb-5">
+          <div className="w-16 h-16  rounded-2xl flex items-center justify-center  mb-5">
             <Image
               src="/jcl-logo.png"
               alt="JC&L Logo"
@@ -70,8 +82,9 @@ export default function LoginPage() {
               name="username"
               type="text"
               required
+              disabled={isLoading}
               placeholder="Enter your admin username"
-              className="w-full bg-gray-50 focus:bg-white h-11 transition-colors"
+              className="w-full bg-gray-50 focus:bg-white h-11 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             />
           </div>
 
@@ -79,18 +92,42 @@ export default function LoginPage() {
             <label className="text-sm font-semibold text-gray-700">
               Password
             </label>
-            <Input
-              name="password"
-              type="password"
-              required
-              placeholder="••••••••••••"
-              className="w-full bg-gray-50 focus:bg-white h-11 transition-colors"
-            />
+            <div className="relative">
+              <Input
+                name="password"
+                type={showPassword ? "text" : "password"}
+                required
+                disabled={isLoading}
+                placeholder="••••••••••••"
+                className="w-full bg-gray-50 focus:bg-white h-11 pr-10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                onClick={() => setShowPassword(!showPassword)}
+                disabled={isLoading}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? (
+                  <EyeOff className="h-5 w-5" />
+                ) : (
+                  <Eye className="h-5 w-5" />
+                )}
+              </button>
+            </div>
           </div>
+
+          {/* Form-Level Error Message Box */}
+          {errorMessage && (
+            <div className="bg-red-50 text-red-600 text-sm p-3 rounded-lg flex items-center gap-2 border border-red-100 animate-in fade-in slide-in-from-top-2 duration-300">
+              <AlertCircle className="h-4 w-4 shrink-0" />
+              <p>{errorMessage}</p>
+            </div>
+          )}
 
           <Button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 h-12 text-base font-semibold shadow-md shadow-blue-200 transition-all hover:-translate-y-0.5 active:translate-y-0"
+            className="w-full bg-blue-600 hover:bg-blue-500 text-white h-12 text-base font-semibold rounded-lg hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300 disabled:opacity-80 disabled:cursor-not-allowed"
             disabled={isLoading}
           >
             {isLoading ? (
