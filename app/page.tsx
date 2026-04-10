@@ -27,10 +27,9 @@ const testimonials = [
     name: "— Vice President, JC&L Proserve Inc.",
   },
   {
-    src: "/ceo-silluoet.jpg",
-    message:
-      '"A reliable partner who consistently exceeds expectations in every project."',
-    name: "— HR Director, JC&L Proserve Inc.",
+    src: "/admin-hazel.jpg",
+    message: '"Excellence in Crewing, trust in service"',
+    name: "— Admin, JC&L Proserve Inc.",
   },
 ];
 
@@ -92,7 +91,6 @@ function Navbar() {
               className="hover:text-primary transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
             >
               {item.label}
-              
             </Link>
           ))}
 
