@@ -3,10 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation"; // Added for navigation
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -15,13 +12,15 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { 
-  CheckCircle2, 
-  ArrowRight, 
-  Brush, 
-  Armchair, 
-  Users, 
+import {
+  CheckCircle2,
+  ArrowRight,
+  Brush,
+  Armchair,
+  Users,
   Phone,
+  Code,
+  Monitor,
 } from "lucide-react";
 
 // 1. DATA DEFINITION
@@ -34,7 +33,7 @@ const servicesData = [
       "Deep cleaning and sanitization protocols",
       "Waste management and recycling",
       "24/7 onsite maintenance support",
-      "Green cleaning product compliance"
+      "Green cleaning product compliance",
     ],
     icon: Brush,
   },
@@ -46,7 +45,7 @@ const servicesData = [
       "Executive search and headhunting",
       "Technical skills assessment",
       "Background checks and vetting",
-      "Interview coordination"
+      "Interview coordination",
     ],
     icon: Armchair,
   },
@@ -71,15 +70,38 @@ const servicesData = [
     details: ["Certified welders", "Electricians", "Machine operators"],
     icon: Users,
   },
+  {
+    title: "Website Development",
+    id: "website",
+    desc: "Custom website design and development tailored to your brand.",
+    details: [
+      "Responsive web design",
+      "E-commerce platforms",
+      "CMS development",
+      "Website maintenance",
+    ],
+    icon: Monitor,
+  },
+  {
+    title: "System Development",
+    id: "system",
+    desc: "Robust customized system and software development.",
+    details: [
+      "Enterprise software solutions",
+      "Automated business workflows",
+      "Database management systems",
+      "API development and integration",
+    ],
+    icon: Code,
+  },
 ];
 
 // 2. THE COMPONENT
-type Service = typeof servicesData[number];
+type Service = (typeof servicesData)[number];
 
 export default function ServicesSection() {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const router = useRouter();
-
 
   const handleGetQuote = () => {
     if (selectedService) {
@@ -87,13 +109,13 @@ export default function ServicesSection() {
 
       // LOGIC: If the form exists on this page, scroll to it.
       // If not (e.g., we are on Home page), go to the Partner page form.
-      const formElement = document.getElementById('partner-form');
-      
+      const formElement = document.getElementById("partner-form");
+
       if (formElement) {
-        formElement.scrollIntoView({ behavior: 'smooth' });
+        formElement.scrollIntoView({ behavior: "smooth" });
       } else {
         // Navigate to partner page and scroll to form
-        router.push('/partnerwithus#partner-form');
+        router.push("/partnerwithus#partner-form");
       }
     }
   };
@@ -131,7 +153,9 @@ export default function ServicesSection() {
                   <service.icon size={32} />
                 </div>
                 <div className="space-y-3">
-                  <h3 className="text-2xl font-bold text-blue-900">{service.title}</h3>
+                  <h3 className="text-2xl font-bold text-blue-900">
+                    {service.title}
+                  </h3>
                   <p className="text-slate-500 leading-relaxed">
                     {service.desc}
                   </p>
@@ -146,7 +170,10 @@ export default function ServicesSection() {
       </div>
 
       {/* MODAL */}
-      <Dialog open={!!selectedService} onOpenChange={() => setSelectedService(null)}>
+      <Dialog
+        open={!!selectedService}
+        onOpenChange={() => setSelectedService(null)}
+      >
         <DialogContent className="bg-white sm:max-w-lg border-t-8 border-teal-600 max-h-[90vh] overflow-y-auto">
           {selectedService && (
             <>
@@ -165,32 +192,39 @@ export default function ServicesSection() {
               </DialogHeader>
 
               <div className="py-4">
-                <h4 className="font-semibold text-slate-900 mb-3">Service Inclusions:</h4>
+                <h4 className="font-semibold text-slate-900 mb-3">
+                  Service Inclusions:
+                </h4>
                 <ul className="space-y-2">
-                  {selectedService.details?.map((detail: string, idx: number) => (
-                    <li key={idx} className="flex items-center gap-3 text-slate-600">
-                      <CheckCircle2 className="w-5 h-5 text-teal-500 shrink-0" />
-                      <span>{detail}</span>
-                    </li>
-                  ))}
+                  {selectedService.details?.map(
+                    (detail: string, idx: number) => (
+                      <li
+                        key={idx}
+                        className="flex items-center gap-3 text-slate-600"
+                      >
+                        <CheckCircle2 className="w-5 h-5 text-teal-500 shrink-0" />
+                        <span>{detail}</span>
+                      </li>
+                    ),
+                  )}
                 </ul>
               </div>
 
               <DialogFooter className="gap-2 sm:gap-2 mt-4 pt-4 border-t border-slate-100">
-                <Button 
-                    variant="outline" 
-                    className="w-full sm:w-auto" 
-                    onClick={() => setSelectedService(null)}
+                <Button
+                  variant="outline"
+                  className="w-full sm:w-auto"
+                  onClick={() => setSelectedService(null)}
                 >
-                    Close
+                  Close
                 </Button>
-                <Button 
-                    className="w-full sm:w-auto bg-blue-900 hover:bg-blue-800" 
-                    onClick={handleGetQuote}
+                <Button
+                  className="w-full sm:w-auto bg-blue-900 hover:bg-blue-800"
+                  onClick={handleGetQuote}
                 >
-                    Get a Quote
+                  Get a Quote
                 </Button>
-            </DialogFooter>
+              </DialogFooter>
             </>
           )}
         </DialogContent>
