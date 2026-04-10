@@ -21,6 +21,7 @@ import {
   Phone,
   Code,
   Monitor,
+  HardHat,
 } from "lucide-react";
 
 // 1. DATA DEFINITION
@@ -94,6 +95,17 @@ const servicesData = [
     ],
     icon: Code,
   },
+  {
+    title: "Engineering & Construction",
+    id: "engineering",
+    desc: "Reliable engineering and construction manpower solutions.",
+    details: [
+      "Licensed engineers and safety officers",
+      "Project supervisors and foremen",
+      "Skilled and general construction laborers",
+    ],
+    icon: HardHat,
+  },
 ];
 
 // 2. THE COMPONENT
@@ -101,6 +113,7 @@ type Service = (typeof servicesData)[number];
 
 export default function ServicesSection() {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [showAll, setShowAll] = useState(false);
   const router = useRouter();
 
   const handleGetQuote = () => {
@@ -142,31 +155,46 @@ export default function ServicesSection() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {servicesData.map((service, i) => (
-            <Card
-              key={i}
-              onClick={() => setSelectedService(service)}
-              className="group cursor-pointer hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-none bg-white rounded-[2rem] overflow-hidden"
-            >
-              <CardContent className="p-10 space-y-6">
-                <div className="w-16 h-16 bg-blue-50 text-blue-900 rounded-2xl flex items-center justify-center transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                  <service.icon size={32} />
-                </div>
-                <div className="space-y-3">
-                  <h3 className="text-2xl font-bold text-blue-900">
-                    {service.title}
-                  </h3>
-                  <p className="text-slate-500 leading-relaxed">
-                    {service.desc}
-                  </p>
-                </div>
-                <div className="inline-flex items-center text-sm font-bold text-teal-600 group-hover:translate-x-1 transition-transform">
-                  View Details <ArrowRight className="ml-1 w-4 h-4" />
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+          {(showAll ? servicesData : servicesData.slice(0, 6)).map(
+            (service, i) => (
+              <Card
+                key={i}
+                onClick={() => setSelectedService(service)}
+                className="group cursor-pointer hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-none bg-white rounded-[2rem] overflow-hidden"
+              >
+                <CardContent className="p-10 space-y-6">
+                  <div className="w-16 h-16 bg-blue-50 text-blue-900 rounded-2xl flex items-center justify-center transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                    <service.icon size={32} />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-2xl font-bold text-blue-900">
+                      {service.title}
+                    </h3>
+                    <p className="text-slate-500 leading-relaxed">
+                      {service.desc}
+                    </p>
+                  </div>
+                  <div className="inline-flex items-center text-sm font-bold text-teal-600 group-hover:translate-x-1 transition-transform">
+                    View Details <ArrowRight className="ml-1 w-4 h-4" />
+                  </div>
+                </CardContent>
+              </Card>
+            ),
+          )}
         </div>
+
+        {servicesData.length > 6 && (
+          <div className="mt-16 flex justify-center">
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-2 border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white rounded-full px-8 font-semibold transition-all duration-300"
+              onClick={() => setShowAll(!showAll)}
+            >
+              {showAll ? "View Less Services" : "View All Services"}
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* MODAL */}

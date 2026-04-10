@@ -1,7 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, X, ArrowRight, CheckCircle2 } from "lucide-react";
+import {
+  Menu,
+  X,
+  ArrowRight,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  Star,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
@@ -371,74 +379,88 @@ export default function HomePage() {
       <ServicesSection />
 
       {/* WHY CHOOSE US - Feature-rich section with modern layout */}
-      <section id="about" className="py-32 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div className="relative w-full max-w-md mx-auto">
-              {/* Background blur circle */}
-              <div className="absolute -top-12 -left-12 w-96 h-96 bg-primary/10 rounded-full blur-3xl opacity-60" />
+      <section
+        id="about"
+        className="py-32 bg-slate-50/50 overflow-hidden relative"
+      >
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            {/* Left: Image & Testimonial */}
+            <div className="relative w-full max-w-lg mx-auto lg:mx-0">
+              {/* Decorative Background Elements */}
+              <div className="absolute -top-12 -left-12 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl shadow-2xl" />
+              <div className="absolute -bottom-12 -right-12 w-72 h-72 bg-green-400/20 rounded-full blur-3xl shadow-2xl" />
 
-              {/* Image container - slightly bigger */}
-              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white scale-105">
+              {/* Main Image Container */}
+              <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl border-[6px] border-white group">
+                <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
                 <Image
                   src={testimonials[current].src}
                   alt="Our Team"
                   width={600}
                   height={800}
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full aspect-4/5 transform group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
 
-              {/* Testimonial box - slightly smaller */}
-              <div className="absolute -bottom-8 -right-8 bg-white p-6 rounded-2xl shadow-2xl border max-w-[60%]">
-                <div className="flex gap-1 mb-3">
+              {/* Enhanced Testimonial Floating Card */}
+              <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:-bottom-12 md:-right-12 w-[92%] sm:w-[85%] bg-white/90 backdrop-blur-3xl p-5 sm:p-8 rounded-3xl shadow-xl border border-white/60 z-20">
+                <div className="flex gap-1.5 mb-4">
                   {[1, 2, 3, 4, 5].map((s) => (
-                    <div key={s} className="w-4 h-4 bg-yellow-400 rounded-sm" />
+                    <Star
+                      key={s}
+                      className="w-5 h-5 fill-yellow-400 text-yellow-400 drop-shadow-sm"
+                    />
                   ))}
                 </div>
-                <p className="text-xs font-medium italic text-muted-foreground">
+                <p className="text-sm sm:text-base font-semibold italic text-slate-700 leading-relaxed mb-4">
                   {testimonials[current].message}
                 </p>
-                <p className="mt-3 font-bold text-foreground">
-                  {testimonials[current].name}
-                </p>
-
-                {/* Carousel controls */}
-                <div className="flex justify-between mt-4">
-                  <button
-                    onClick={prevSlide}
-                    className="px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300 text-xs"
-                  >
-                    Prev
-                  </button>
-                  <button
-                    onClick={nextSlide}
-                    className="px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300 text-xs"
-                  >
-                    Next
-                  </button>
+                <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-200/60">
+                  <p className="font-bold text-blue-950 text-sm">
+                    {testimonials[current].name}
+                  </p>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={prevSlide}
+                      className="p-2 bg-white rounded-full hover:bg-blue-600 hover:text-white text-slate-600 transition-all shadow-md border border-slate-100"
+                      aria-label="Previous testimonial"
+                    >
+                      <ChevronLeft size={18} />
+                    </button>
+                    <button
+                      onClick={nextSlide}
+                      className="p-2 bg-white rounded-full hover:bg-blue-600 hover:text-white text-slate-600 transition-all shadow-md border border-slate-100"
+                      aria-label="Next testimonial"
+                    >
+                      <ChevronRight size={18} />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="space-y-12">
-              <div>
-                <h2 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-4">
-                  The Advantage
-                </h2>
-                <h3 className="text-4xl font-extrabold tracking-tight mb-6 leading-tight">
+            {/* Right: Content & Features */}
+            <div className="space-y-10 pt-16 lg:pt-0">
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-800 font-bold tracking-widest text-xs uppercase shadow-sm border border-blue-100">
+                  The JC&L Advantage
+                </div>
+                <h3 className="text-4xl sm:text-5xl font-extrabold text-blue-950 tracking-tight leading-[1.15]">
                   Beyond Just Hiring—
                   <br />
-                  We Build Partnerships
+                  <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-700 to-green-600">
+                    We Build Partnerships
+                  </span>
                 </h3>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-lg text-slate-600 leading-relaxed max-w-lg">
                   Our rigorous selection process ensures that every candidate we
-                  provide isn&apos;t just qualified, but also aligns with your
-                  company&apos;s culture and values.
+                  provide isn&apos;t just qualified, but absolutely aligns with
+                  your company&apos;s operational culture and long-term targets.
                 </p>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-8">
+              <div className="grid sm:grid-cols-2 gap-x-6 gap-y-6">
                 {[
                   {
                     title: "Licensed & Compliant",
@@ -457,15 +479,18 @@ export default function HomePage() {
                     desc: "We handle the administrative heavy lifting.",
                   },
                 ].map((item, i) => (
-                  <div key={i} className="flex gap-4">
-                    <div className="mt-1 shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                      <CheckCircle2 size={16} />
+                  <div
+                    key={i}
+                    className="flex gap-4 group p-4 rounded-2xl hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-slate-100"
+                  >
+                    <div className="shrink-0 w-14 h-14 rounded-2xl bg-blue-50 group-hover:bg-blue-600 group-hover:text-white flex items-center justify-center text-blue-600 transition-colors shadow-inner">
+                      <CheckCircle2 size={26} />
                     </div>
                     <div>
-                      <h4 className="font-bold text-foreground mb-1">
+                      <h4 className="font-bold text-blue-950 mb-1 text-base">
                         {item.title}
                       </h4>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm text-slate-500 leading-relaxed">
                         {item.desc}
                       </p>
                     </div>
@@ -473,12 +498,15 @@ export default function HomePage() {
                 ))}
               </div>
 
-              <Link
-                href="/aboutus"
-                className="inline-flex items-center justify-center font-extrabold rounded-full h-14 px-8 bg-blue-600 text-background hover:bg-blue-700 transition-all hover:shadow-lg"
-              >
-                View More
-              </Link>
+              <div className="pt-4">
+                <Link
+                  href="/aboutus"
+                  className="inline-flex items-center justify-center font-bold rounded-full h-14 px-10 bg-blue-950 text-white hover:bg-blue-800 transition-all shadow-xl hover:shadow-blue-900/20 hover:-translate-y-1 group"
+                >
+                  Discover Our Story
+                  <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
