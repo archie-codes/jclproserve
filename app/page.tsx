@@ -14,7 +14,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import SplitText from "@/components/SplitText";
-
+import Counter from "@/components/Counter";
 import ServicesSection from "@/components/ServicesSection";
 
 const handleAnimationComplete = () => {
@@ -164,7 +164,7 @@ export default function HomePage() {
       <Navbar />
 
       {/* HERO SECTION - Redesigned with dynamic split layout and high-quality imagery */}
-      <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+      <section className="relative min-h-dvh w-full flex items-center pt-28 pb-16 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-linear-to-r from-blue-950/95 via-blue-900/80 to-transparent z-10" />
           <Image
@@ -229,14 +229,18 @@ export default function HomePage() {
 
             <div className="flex items-center gap-8 pt-8 border-t border-white/10">
               <div>
-                <p className="text-3xl font-bold text-white">500+</p>
+                <p className="text-3xl font-bold text-white">
+                  <Counter end={500} suffix="+" />
+                </p>
                 <p className="text-sm text-blue-200/60 uppercase tracking-widest font-semibold">
                   Active Clients
                 </p>
               </div>
               <div className="w-px h-10 bg-white/10" />
               <div>
-                <p className="text-3xl font-bold text-white">12k+</p>
+                <p className="text-3xl font-bold text-white">
+                  <Counter end={12} suffix="k+" />
+                </p>
                 <p className="text-sm text-blue-200/60 uppercase tracking-widest font-semibold">
                   Deployed Staff
                 </p>
