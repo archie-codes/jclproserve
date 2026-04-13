@@ -134,7 +134,7 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="our-services" className="py-32 relative bg-slate-50/50">
+    <section id="our-services" className="py-20 relative bg-slate-50/50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-2xl">

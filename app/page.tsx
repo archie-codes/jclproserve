@@ -2,20 +2,19 @@
 
 import Link from "next/link";
 import {
-  Menu,
-  X,
   ArrowRight,
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
   Star,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 import SplitText from "@/components/SplitText";
 import Counter from "@/components/Counter";
 import ServicesSection from "@/components/ServicesSection";
+import Navbar from "@/components/Navbar";
 
 const handleAnimationComplete = () => {
   console.log("All letters have animated!");
@@ -40,113 +39,6 @@ const testimonials = [
     name: "— Admin, JC&L Proserve Inc.",
   },
 ];
-
-function Navbar() {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  const navItems = [
-    { label: "Home", href: "/" }, // your homepage
-    { label: "Services", href: "/#our-services" }, // scroll to section on homepage
-    { label: "Jobs", href: "/#jobs" }, // another page
-    { label: "About", href: "/#about" }, // scroll to about section
-  ];
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/90 backdrop-blur-md shadow-sm py-3"
-          : "bg-transparent py-5"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center text-primary-foreground font-bold text-xl group-hover:scale-105 transition-transform">
-            <Image
-              src="/jcl-logo.png"
-              alt="Logo"
-              width={40}
-              height={40}
-              className="bg-transparent"
-            />
-          </div>
-          <span
-            className={`font-bold text-xl tracking-tight transition-colors ${
-              scrolled ? "text-black" : "text-white"
-            }`}
-          >
-            JC&L Proserve Inc.
-          </span>
-        </Link>
-
-        {/* Desktop Menu */}
-        <nav
-          className={`hidden md:flex items-center gap-10 text-sm font-semibold transition-colors ${
-            scrolled ? "text-black/80" : "text-white/90"
-          }`}
-        >
-          {navItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="hover:text-primary transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
-            >
-              {item.label}
-            </Link>
-          ))}
-
-          <Link
-            href="/contactus"
-            className="px-4 py-2 rounded-full bg-blue-600 text-primary-foreground font-bold hover:bg-blue-700 transition-colors"
-          >
-            Contact Us
-          </Link>
-        </nav>
-
-        {/* Mobile Button */}
-        <button
-          onClick={() => setOpen(!open)}
-          className={`md:hidden p-2 rounded-full transition-colors ${
-            scrolled ? "bg-secondary text-foreground" : "bg-white/10 text-white"
-          }`}
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {open && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-background border-b animate-in slide-in-from-top duration-300">
-          <nav className="flex flex-col px-6 py-8 space-y-6 text-lg font-medium">
-            {[
-              { name: "Home", href: "/" },
-              { name: "Services", href: "/partnerwithus#our-services" },
-              { name: "Jobs", href: "/jobs" },
-              { name: "About", href: "/aboutus" },
-              { name: "Contact", href: "/contactus" },
-            ].map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="hover:text-primary transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
-    </header>
-  );
-}
 
 export default function HomePage() {
   const [current, setCurrent] = useState(0);
@@ -294,98 +186,12 @@ export default function HomePage() {
       </section>
 
       {/* SERVICES SECTION - Redesigned with icon-driven grid and glassmorphism */}
-      {/* <section id="services" className="py-32 relative bg-slate-50/50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <div className="max-w-2xl">
-              <h2 className="text-sm font-black text-blue-900 uppercase tracking-[0.2em] mb-4">
-                Core Expertise
-              </h2>
-              <p className="text-4xl md:text-5xl font-extrabold text-blue-900 tracking-tight leading-tight">
-                Specialized Manpower for{" "}
-                <span className="text-green-600 italic underline decoration-blue-100 underline-offset-8">
-                  Every Industry
-                </span>
-              </p>
-            </div>
-            <p className="text-slate-600 max-w-sm text-lg leading-relaxed">
-              We provide tailored workforce solutions that integrate seamlessly
-              with your operational requirements.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Janitorial Services",
-                desc: "Expert sanitation and facility maintenance services.",
-                icon: Brush, // Note: Changed from BrushCleaning to Brush for standard Lucide support
-                link: "/partnerwithus#our-services",
-              },
-              {
-                title: "Recruitment and Staffing",
-                desc: "Tailored hiring solutions for diverse business needs.",
-                icon: Armchair,
-                link: "/partnerwithus#our-services",
-              },
-              {
-                title: "Manpower Services",
-                desc: "Comprehensive staffing solutions across various sectors.",
-                icon: Users,
-                link: "/partnerwithus#our-services",
-              },
-              {
-                title: "Workforce Outsourcing",
-                desc: "Flexible outsourcing to optimize your workforce management.",
-                icon: Phone,
-                link: "/partnerwithus#our-services",
-              },
-              {
-                title: "Skilled Deployment",
-                desc: "Skilled labor for production and assembly lines.",
-                icon: Users,
-                link: "/partnerwithus#our-services",
-              },
-              // {
-              //   title: "Facility Management",
-              //   desc: "Comprehensive onsite management and technical support.",
-              //   icon: Building2,
-              // },
-            ].map((service, i) => (
-              <Card
-                key={i}
-                className="group hover:shadow-2xl transition-all duration-500 border-none bg-white rounded-[2rem] overflow-hidden"
-              >
-                <CardContent className="p-10 space-y-6">
-                  <div className="w-16 h-16 bg-blue-50 text-blue-900 rounded-2xl flex items-center justify-center transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                    <service.icon size={32} />
-                  </div>
-                  <div className="space-y-3">
-                    <h3 className="text-2xl font-bold text-blue-900">
-                      {service.title}
-                    </h3>
-                    <p className="text-slate-500 leading-relaxed">
-                      {service.desc}
-                    </p>
-                  </div>
-                  <Link
-                    href={service.link}
-                    className="inline-flex items-center text-sm font-bold text-blue-900 group-hover:translate-x-1 transition-transform"
-                  >
-                    Learn more <ArrowRight className="ml-1 w-4 h-4" />
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section> */}
       <ServicesSection />
 
       {/* WHY CHOOSE US - Feature-rich section with modern layout */}
       <section
         id="about"
-        className="py-32 bg-slate-50/50 overflow-hidden relative"
+        className="py-20 bg-slate-50/50 overflow-hidden relative"
       >
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">

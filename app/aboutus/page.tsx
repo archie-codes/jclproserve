@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
+import Navbar from "@/components/Navbar";
 
 export default function MissionPage() {
   const coreValues = [
@@ -45,63 +46,46 @@ export default function MissionPage() {
         "Continuous improvement in recruitment and workforce management.",
       icon: Globe,
     },
-    // {
-    //   title: "Commitment",
-    //   description:
-    //     "We are dedicated to the long-term success of our partners, providing unwavering support throughout their journey.",
-    //   icon: Briefcase,
-    // },
   ];
 
   return (
     <main className="min-h-screen bg-background">
-      {/* NAVIGATION HEADER */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-blue-600-foreground font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
-              <Image src="/jcl-logo.png" alt="Logo" width={40} height={40} />
-            </div>
-            <span className="font-bold text-xl tracking-tight text-foreground">
-              JC&L Proserve Inc.
-            </span>
-          </Link>
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-blue-600 transition-colors"
-          >
-            <ChevronLeft size={16} />
-            Back to Home
-          </Link>
-        </div>
-      </header>
+      <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative py-32 overflow-hidden bg-linear-to-br from-blue-950 via-blue-900 to-slate-900">
-        <div className="absolute inset-0 opacity-10 bg-[radial-linear(circle_at_top_right,var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-bluetext-blue-600/10 border border-bluetext-blue-600/20 text-white text-xs font-bold tracking-wider uppercase">
-              Purpose & Principles
-            </div>
-            <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.1] text-white tracking-tight">
-              Driven by Purpose,{" "}
-              <span className="text-blue-600 italic">Guided by Values</span>
-            </h1>
-            <p className="text-xl text-justify text-blue-100/80 leading-relaxed max-w-3xl mx-auto">
-              JC&L Proserve, Inc. is a trusted manpower provider specializing in
-              delivering reliable, skilled, and professional workers to meet the
-              growing operational needs of businesses across various industries.
-              Built on a foundation of integrity, excellence, and service
-              commitment, the company aims to become one of the most dependable
-              manpower service providers in the country. We strive to connect
-              competent workers with reputable companies while ensuring the
-              highest standards of recruitment, deployment, and workforce
-              support. Through strong leadership and a passion for service, JC&L
-              Proserve, Inc. continues to expand as a competitive manpower and
-              recruitment solutions partner.
-            </p>
+      <section className="relative min-h-[60vh] w-full flex items-center pt-28 pb-16 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-linear-to-r from-blue-950/95 via-blue-900/90 to-blue-950/80 z-10" />
+          <Image
+            src="/building.jpg"
+            alt="Corporate Background"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-20 w-full text-center space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold tracking-wider uppercase backdrop-blur-sm mb-2">
+            Purpose & Principles
           </div>
+          <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.1] text-white tracking-tight">
+            Driven by Purpose, <br />
+            <span className="text-cyan-400 italic">Guided by Values</span>
+          </h1>
+          <p className="text-lg md:text-xl text-blue-100/80 leading-relaxed max-w-4xl mx-auto mb-4 text-justify">
+            JC&L Proserve, Inc. is a trusted manpower provider specializing in
+            delivering reliable, skilled, and professional workers to meet the
+            growing operational needs of businesses across various industries.
+            Built on a foundation of integrity, excellence, and service
+            commitment, the company aims to become one of the most dependable
+            manpower service providers in the country. We strive to connect
+            competent workers with reputable companies while ensuring the
+            highest standards of recruitment, deployment, and workforce support.
+            Through strong leadership and a passion for service, JC&L Proserve,
+            Inc. continues to expand as a competitive manpower and recruitment
+            solutions partner.
+          </p>
         </div>
       </section>
 
@@ -244,9 +228,7 @@ export default function MissionPage() {
                 size="lg"
                 className="w-full sm:w-auto rounded-full px-12 h-16 text-lg font-extrabold shadow-2xl shadow-blue bg-blue-600 hover:bg-blue-600/90 group"
               >
-                <Link href="/partnerwithus">
-                  Partner With Us
-                </Link>
+                <Link href="/partnerwithus">Partner With Us</Link>
               </Button>
             </div>
           </div>

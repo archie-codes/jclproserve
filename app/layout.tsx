@@ -106,6 +106,22 @@ export default function RootLayout({
                     Services
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/clients"
+                    className="hover:text-primary transition-colors"
+                  >
+                    Clients
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/projects"
+                    className="hover:text-primary transition-colors"
+                  >
+                    Projects
+                  </Link>
+                </li>
               </ul>
             </div>
 
